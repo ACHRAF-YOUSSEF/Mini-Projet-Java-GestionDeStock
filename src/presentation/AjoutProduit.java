@@ -113,6 +113,14 @@ public class AjoutProduit extends JFrame {
         // setting the fonts + colors:
         //fonts:
         titre.setFont(new Font(null, Font.PLAIN, 50));
+        codeProduit.setFont(new Font(null, Font.PLAIN, 20));
+        nomProduit.setFont(new Font(null, Font.PLAIN, 20));
+        categorie.setFont(new Font(null, Font.PLAIN, 20));
+        prix.setFont(new Font(null, Font.PLAIN, 20));
+        prixTextField.setFont(new Font(null, Font.PLAIN, 15));
+        categorieTextField.setFont(new Font(null, Font.PLAIN, 15));
+        nomProduitTextField.setFont(new Font(null, Font.PLAIN, 15));
+        codeProduitTextField.setFont(new Font(null, Font.PLAIN, 15));
         rechercherTextField.setFont(new Font(null, Font.PLAIN, 15));
 
         // colors (Foreground + Background):
@@ -153,9 +161,93 @@ public class AjoutProduit extends JFrame {
                 40,
                 40
         );
+        codeProduit.setBounds(
+                titre.getX(),
+                titre.getY() + 80,
+                200,
+                40
+        );
+        codeProduitTextField.setBounds(
+                codeProduit.getX(),
+                codeProduit.getY() + 40,
+                200,
+                40
+        );
+        nomProduit.setBounds(
+                codeProduitTextField.getX(),
+                codeProduitTextField.getY() + 40,
+                200,
+                40
+        );
+        nomProduitTextField.setBounds(
+                nomProduit.getX(),
+                nomProduit.getY() + 40,
+                200,
+                40
+        );
+        categorie.setBounds(
+                nomProduitTextField.getX(),
+                nomProduitTextField.getY() + 40,
+                200,
+                40
+        );
+        categorieTextField.setBounds(
+                categorie.getX(),
+                categorie.getY() + 40,
+                200,
+                40
+        );
+        prix.setBounds(
+                categorieTextField.getX(),
+                categorieTextField.getY() + 40,
+                200,
+                40
+        );
+        prixTextField.setBounds(
+                prix.getX(),
+                prix.getY() + 40,
+                200,
+                40
+        );
+        ajouter.setBounds(
+                prixTextField.getX(),
+                prixTextField.getY() + 100,
+                140,
+                40
+        );
+        update.setBounds(
+                prixTextField.getX() + ajouter.getWidth() + 10,
+                prixTextField.getY() + 100,
+                160,
+                40
+        );
+        supprimer.setBounds(
+                prixTextField.getX(),
+                update.getY() + 50,
+                160,
+                40
+        );
+        annuler.setBounds(
+                prixTextField.getX() + supprimer.getWidth() + 10,
+                update.getY() + 50,
+                140,
+                40
+        );
 
         // adding border to the JTextFields:
         rechercherTextField.setBorder(
+                BorderFactory.createMatteBorder(0, 0, 1, 0 , Color.BLACK)
+        );
+        codeProduitTextField.setBorder(
+                BorderFactory.createMatteBorder(0, 0, 1, 0 , Color.BLACK)
+        );
+        nomProduitTextField.setBorder(
+                BorderFactory.createMatteBorder(0, 0, 1, 0 , Color.BLACK)
+        );
+        categorieTextField.setBorder(
+                BorderFactory.createMatteBorder(0, 0, 1, 0 , Color.BLACK)
+        );
+        prixTextField.setBorder(
                 BorderFactory.createMatteBorder(0, 0, 1, 0 , Color.BLACK)
         );
 
@@ -172,6 +264,14 @@ public class AjoutProduit extends JFrame {
         this.add(update);
         this.add(supprimer);
         this.add(annuler);
+        this.add(codeProduit);
+        this.add(codeProduitTextField);
+        this.add(nomProduit);
+        this.add(nomProduitTextField);
+        this.add(categorie);
+        this.add(categorieTextField);
+        this.add(prix);
+        this.add(prixTextField);
 
         // setup JFrame:
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
