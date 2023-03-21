@@ -43,7 +43,20 @@ public class GestionImpl implements IGestion {
 
     @Override
     public void modifierProduit(Produit p) {
+        Connection cx = SingletonConnection.getInstance();
 
+        try {
+            PreparedStatement st = cx.prepareStatement("update produit set nom= ?, categorie= ?, prix= ? where code_produit= ?");
+
+            st.setString(1, p.getNom());
+            st.setString(2, p.getCategorie());
+            st.setDouble(3, p.getPrix());
+            st.setInt(4, p.getCode_produit());
+
+            st.executeUpdate();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @Override

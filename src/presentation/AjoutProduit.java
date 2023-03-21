@@ -3,13 +3,12 @@ package presentation;
 import dao.GestionImpl;
 import dao.IGestion;
 import metier.entity.Produit;
-import metier.entity.Utilisateur;
 import presentation.tableModeles.TableModeleProduit;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class AjoutProduit extends JFrame {
     // components
@@ -150,8 +149,83 @@ public class AjoutProduit extends JFrame {
                 me.chargerTable(gestion.getAllProduit());
             }
         });
-        update.addActionListener(e -> {});
-        supprimer.addActionListener(e -> {});
+        update.addActionListener(e -> {
+            if (
+                    codeProduitTextField.getText().equals("")
+                    || nomProduitTextField.getText().equals("")
+                    || categorieTextField.getText().equals("")
+                    || prixTextField.getText().equals("")
+            ) {
+                JOptionPane.showMessageDialog(
+                        AjoutProduit.this,
+                        "erreur de saisie"
+                );
+            } else {
+                try {
+                    int code = Integer.parseInt(codeProduitTextField.getText());
+                    double price = Double.parseDouble(prixTextField.getText());
+                    Produit produit = gestion.getProduit(code);
+
+                    if (produit == null) {
+                        JOptionPane.showMessageDialog(
+                                AjoutProduit.this,
+                                "impossible de faire le mis à jour ce produit!"
+                        );
+                    } else {
+                        produit.setNom(nomProduitTextField.getText());
+                        produit.setCategorie(String.valueOf(categorieTextField.getText()));
+                        produit.setPrix(price);
+
+                        JOptionPane.showMessageDialog(
+                                AjoutProduit.this,
+                                "produit à été modifier!"
+                        );
+
+                        gestion.modifierProduit(produit);
+                    }
+                } catch (NumberFormatException e1) {
+                    JOptionPane.showMessageDialog(
+                            AjoutProduit.this,
+                            "erreur de saisie de l'id!"
+                    );
+                }
+
+                me.chargerTable(gestion.getAllProduit());
+            }
+        });
+        supprimer.addActionListener(e -> {
+            if (codeProduitTextField.getText().equals("")) {
+                JOptionPane.showMessageDialog(
+                        AjoutProduit.this,
+                        "erreur de saisie"
+                );
+            } else {
+                try {
+                    int code = Integer.parseInt(codeProduitTextField.getText());
+
+                    if (gestion.getUtilisateur(code) == null) {
+                        JOptionPane.showMessageDialog(
+                                AjoutProduit.this,
+                                "impossible de supprimer ce produit!"
+                        );
+                    } else {
+                        gestion.supprimerUtilisateur(code);
+
+                        JOptionPane.showMessageDialog(
+                                AjoutProduit.this,
+                                "produit à été supprimer!"
+                        );
+                    }
+                } catch (NumberFormatException e1) {
+                    JOptionPane.showMessageDialog(
+                            AjoutProduit.this,
+                            "erreur de saisie de l'id!"
+                    );
+                }
+
+                me.chargerTable(gestion.getAllProduit());
+            }
+        });
         annuler.addActionListener(e -> {
             codeProduitTextField.setText("");
             nomProduitTextField.setText("");
