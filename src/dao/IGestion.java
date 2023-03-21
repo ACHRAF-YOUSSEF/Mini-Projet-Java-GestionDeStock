@@ -8,6 +8,7 @@ public interface IGestion {
     void ajouterProduit(Produit p);
     void modifierProduit(Produit p);
     void supprimerProduit(int id);
+    Produit getProduit(int id);
     List<Produit> getAllProduit();
     List<Produit> getProduitPMC(String mc);
 

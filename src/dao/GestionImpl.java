@@ -47,18 +47,46 @@ public class GestionImpl implements IGestion {
     }
 
     @Override
-    public void supprimerProduit(int id) {
+    public void supprimerProduit(int code) {
         Connection cx = SingletonConnection.getInstance();
 
         try {
-            PreparedStatement st = cx.prepareStatement("delete from produit where id= ?");
+            PreparedStatement st = cx.prepareStatement("delete from produit where code_produit= ?");
 
-            st.setInt(1, id);
+            st.setInt(1, code);
 
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Produit getProduit(int code) {
+        Connection cx = SingletonConnection.getInstance();
+        Produit produit = null;
+
+        try {
+            PreparedStatement ps = cx.prepareStatement("select * from produit where code_produit= ?");
+
+            ps.setInt(1, code);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                produit = new Produit(
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4)
+                );
+
+                produit.setCode_produit(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return produit;
     }
 
     @Override

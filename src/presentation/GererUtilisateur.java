@@ -150,15 +150,19 @@ public class GererUtilisateur extends JFrame {
                 }
             } else {
                 try {
-                    int id = Integer.parseInt(idTextField.getText());
-
                     Utilisateur utilisateur = new Utilisateur(
                             nomTextField.getText(),
                             String.valueOf(passwordField.getPassword()),
                             (Objects.equals(comboBox.getSelectedItem(), "Admin"))? 1 : 0
                     );
 
-                    if (gestion.getUtilisateur(id) == null) {
+                    if (
+                            gestion.getAllUtilisateur()
+                                    .stream()
+                                    .filter(utilisateur::equals)
+                                    .toList()
+                                    .size() == 0
+                    ) {
                         gestion.ajouterUtilisateur(utilisateur);
 
                         JOptionPane.showMessageDialog(

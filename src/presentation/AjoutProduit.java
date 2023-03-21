@@ -9,6 +9,7 @@ import presentation.tableModeles.TableModeleProduit;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AjoutProduit extends JFrame {
     // components
@@ -100,7 +101,55 @@ public class AjoutProduit extends JFrame {
 
             me.chargerTable(list);
         });
-        ajouter.addActionListener(e -> {});
+        ajouter.addActionListener(e -> {
+            if (
+                    nomProduitTextField.getText().equals("")
+                    || categorieTextField.getText().equals("")
+                    || prixTextField.getText().equals("")
+            ) {
+                JOptionPane.showMessageDialog(
+                        AjoutProduit.this,
+                        "erreur de saisie"
+                );
+            } else {
+                try {
+                    double price = Double.parseDouble(prixTextField.getText());
+
+                    Produit produit = new Produit(
+                            nomProduitTextField.getText(),
+                            categorieTextField.getText(),
+                            price
+                    );
+
+                    if (
+                            gestion.getAllProduit()
+                                    .stream()
+                                    .filter(produit::equals)
+                                    .toList()
+                                    .size() == 0
+                    ) {
+                        gestion.ajouterProduit(produit);
+
+                        JOptionPane.showMessageDialog(
+                                AjoutProduit.this,
+                                "produit à été ajouter!"
+                        );
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                AjoutProduit.this,
+                                "produit deja existant!"
+                        );
+                    }
+                }  catch (NumberFormatException e1) {
+                    JOptionPane.showMessageDialog(
+                            AjoutProduit.this,
+                            "erreur de saisie:\n" + e1.getMessage()
+                    );
+                }
+
+                me.chargerTable(gestion.getAllProduit());
+            }
+        });
         update.addActionListener(e -> {});
         supprimer.addActionListener(e -> {});
         annuler.addActionListener(e -> {
