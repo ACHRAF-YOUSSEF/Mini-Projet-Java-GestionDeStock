@@ -8,7 +8,6 @@ import presentation.tableModeles.TableModeleProduit;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-import java.util.Objects;
 
 public class AjoutProduit extends JFrame {
     // components
@@ -400,9 +399,5 @@ public class AjoutProduit extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new AjoutProduit();
     }
 }
