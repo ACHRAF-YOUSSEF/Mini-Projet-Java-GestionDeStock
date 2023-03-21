@@ -203,13 +203,13 @@ public class AjoutProduit extends JFrame {
                 try {
                     int code = Integer.parseInt(codeProduitTextField.getText());
 
-                    if (gestion.getUtilisateur(code) == null) {
+                    if (gestion.getProduit(code) == null) {
                         JOptionPane.showMessageDialog(
                                 AjoutProduit.this,
                                 "impossible de supprimer ce produit!"
                         );
                     } else {
-                        gestion.supprimerUtilisateur(code);
+                        gestion.supprimerProduit(code);
 
                         JOptionPane.showMessageDialog(
                                 AjoutProduit.this,
