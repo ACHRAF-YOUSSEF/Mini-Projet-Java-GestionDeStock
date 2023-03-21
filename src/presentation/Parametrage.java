@@ -112,7 +112,7 @@ public class Parametrage extends JFrame {
         about.setBackground(Color.GREEN);
         dev.setBackground(Color.GRAY);
 
-        // setting the bounds of the retour JButton:
+        // setting the bounds of the components:
         retour.setBounds(
                 40,
                 80,
@@ -194,9 +194,5 @@ public class Parametrage extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new Parametrage(true);
     }
 }
