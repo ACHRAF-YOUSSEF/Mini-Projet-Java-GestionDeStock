@@ -338,25 +338,25 @@ public class AjoutProduit extends JFrame {
         ajouter.setBounds(
                 prixTextField.getX(),
                 prixTextField.getY() + 100,
-                140,
+                200,
                 40
         );
         update.setBounds(
                 prixTextField.getX() + ajouter.getWidth() + 10,
                 prixTextField.getY() + 100,
-                160,
+                220,
                 40
         );
         supprimer.setBounds(
                 prixTextField.getX(),
                 update.getY() + 50,
-                160,
+                220,
                 40
         );
         annuler.setBounds(
                 prixTextField.getX() + supprimer.getWidth() + 10,
                 update.getY() + 50,
-                140,
+                200,
                 40
         );
 

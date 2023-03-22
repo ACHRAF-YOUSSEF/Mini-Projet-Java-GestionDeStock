@@ -364,25 +364,25 @@ public class GererUtilisateur extends JFrame {
         ajouter.setBounds(
                 confirmPasswordField.getX(),
                 confirmPasswordField.getY() + 50,
-                140,
+                200,
                 40
         );
         update.setBounds(
                 confirmPasswordField.getX() + ajouter.getWidth() + 10,
                 confirmPasswordField.getY() + 50,
-                160,
+                240,
                 40
         );
         supprimer.setBounds(
                 confirmPasswordField.getX(),
                 update.getY() + 50,
-                160,
+                240,
                 40
         );
         annuler.setBounds(
                 confirmPasswordField.getX() + supprimer.getWidth() + 10,
                 update.getY() + 50,
-                140,
+                200,
                 40
         );
 

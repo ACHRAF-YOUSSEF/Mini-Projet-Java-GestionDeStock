@@ -4,11 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimerTask;
 
 public class Admin extends JFrame {
     // SimpleDateFormat
-    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private Date date = new Date();
     // components
     // ImageIcons
