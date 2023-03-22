@@ -298,17 +298,112 @@ public class GestionImpl implements IGestion {
 
     @Override
     public void destocker(Inventaire i) {
+        Connection cx = SingletonConnection.getInstance();
 
+        try {
+            PreparedStatement st = cx.prepareStatement("update inventaire set quantite= ?, remarques= ?, IDTransaction= ?, expirationDate= ? where inventaireID= ? and code_produit= ?");
+
+            st.setInt(1, i.getQuantite());
+            st.setString(2, i.getRemarques());
+            st.setInt(3, i.getIdTransaction());
+            st.setDate(4, i.getDate());
+            st.setInt(5, i.getInventaireID());
+            st.setInt(6, i.getCode_produit());
+
+            st.executeUpdate();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @Override
+    public Inventaire getInventaire(int code) {
+        Connection cx = SingletonConnection.getInstance();
+        Inventaire inventaire = null;
+
+        try {
+            PreparedStatement ps = cx.prepareStatement("select * from inventaire where code_produit= ?");
+
+            ps.setInt(1, code);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                inventaire = new Inventaire(
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(5),
+                        rs.getString(4),
+                        rs.getDate(6)
+                );
+                inventaire.setInventaireID(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return inventaire;
     }
 
     @Override
     public List<Inventaire> getAllInventaire() {
-        return null;
+        Connection cx = SingletonConnection.getInstance();
+        List<Inventaire> list = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = cx.prepareStatement("select * from inventaire");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Inventaire inventaire = new Inventaire(
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(5),
+                        rs.getString(4),
+                        rs.getDate(6)
+                );
+                inventaire.setInventaireID(rs.getInt(1));
+
+                list.add(inventaire);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
     @Override
     public List<Inventaire> getInventairePMC(String mc) {
-        return null;
+        Connection cx = SingletonConnection.getInstance();
+        List<Inventaire> list = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = cx.prepareStatement(
+                    "select inventaire.* FROM inventaire, produit where inventaire.code_produit = produit.code_produit and nom like ?"
+            );
+
+            ps.setString(1, "%" + mc + "%");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Inventaire inventaire = new Inventaire(
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(5),
+                        rs.getString(4),
+                        rs.getDate(6)
+                );
+                inventaire.setInventaireID(rs.getInt(1));
+
+                list.add(inventaire);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
     @Override

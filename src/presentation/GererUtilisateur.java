@@ -98,6 +98,10 @@ public class GererUtilisateur extends JFrame {
         //fonts:
         titre.setFont(new Font(null, Font.PLAIN, 50));
         rechercherTextField.setFont(new Font(null, Font.PLAIN, 15));
+        annuler.setFont(new Font(null, Font.PLAIN, 20));
+        ajouter.setFont(new Font(null, Font.PLAIN, 20));
+        supprimer.setFont(new Font(null, Font.PLAIN, 20));
+        update.setFont(new Font(null, Font.PLAIN, 20));
         id.setFont(new Font(null, Font.PLAIN, 20));
         nom.setFont(new Font(null, Font.PLAIN, 20));
         mot_de_pass.setFont(new Font(null, Font.PLAIN, 20));

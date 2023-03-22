@@ -185,7 +185,7 @@ public class AjoutProduit extends JFrame {
                 } catch (NumberFormatException e1) {
                     JOptionPane.showMessageDialog(
                             AjoutProduit.this,
-                            "erreur de saisie de l'id!"
+                            "erreur de saisie de l'id ou le prix!"
                     );
                 }
 
@@ -235,6 +235,10 @@ public class AjoutProduit extends JFrame {
         // setting the fonts + colors:
         //fonts:
         titre.setFont(new Font(null, Font.PLAIN, 50));
+        annuler.setFont(new Font(null, Font.PLAIN, 20));
+        ajouter.setFont(new Font(null, Font.PLAIN, 20));
+        supprimer.setFont(new Font(null, Font.PLAIN, 20));
+        update.setFont(new Font(null, Font.PLAIN, 20));
         codeProduit.setFont(new Font(null, Font.PLAIN, 20));
         nomProduit.setFont(new Font(null, Font.PLAIN, 20));
         categorie.setFont(new Font(null, Font.PLAIN, 20));

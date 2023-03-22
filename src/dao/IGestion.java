@@ -21,6 +21,7 @@ public interface IGestion {
 
     void stocker(Inventaire i);
     void destocker(Inventaire i);
+    Inventaire getInventaire(int id);
     List<Inventaire> getAllInventaire();
     List<Inventaire> getInventairePMC(String mc);
 
