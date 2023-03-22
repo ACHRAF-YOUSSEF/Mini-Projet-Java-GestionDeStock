@@ -294,8 +294,4 @@ public class Destocker extends JFrame {
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
     }
-
-    public static void main(String[] args) {
-        new Destocker();
-    }
 }

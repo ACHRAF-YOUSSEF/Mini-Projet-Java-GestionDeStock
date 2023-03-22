@@ -4,10 +4,7 @@ import metier.entity.Inventaire;
 import metier.entity.Produit;
 import metier.entity.Utilisateur;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -293,7 +290,34 @@ public class GestionImpl implements IGestion {
 
     @Override
     public void stocker(Inventaire i) {
+        Connection cx = SingletonConnection.getInstance();
+        Inventaire inventaire = getInventaire(i.getCode_produit());
 
+        try {
+            PreparedStatement st;
+            if (inventaire == null) {
+                st = cx.prepareStatement("insert into inventaire(code_produit, quantite, idTransaction, remarques, expirationDate) values(?, ?, ?, ?, ?)");
+
+                st.setInt(1, i.getCode_produit());
+                st.setInt(2, i.getQuantite());
+                st.setInt(3, i.getIdTransaction());
+                st.setString(4, i.getRemarques());
+                st.setDate(5, i.getDate());
+            } else {
+                st = cx.prepareStatement("update inventaire set quantite= ?, remarques= ?, IDTransaction= ?, expirationDate= ? where inventaireID= ? and code_produit= ?");
+
+                st.setInt(1, i.getQuantite());
+                st.setString(2, i.getRemarques());
+                st.setInt(3, i.getIdTransaction());
+                st.setDate(4, i.getDate());
+                st.setInt(5, i.getInventaireID());
+                st.setInt(6, i.getCode_produit());
+            }
+
+            st.executeUpdate();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @Override
