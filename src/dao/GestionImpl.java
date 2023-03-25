@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestionImpl implements IGestion {
+    private List<Inventaire> inventaires = new ArrayList<>();
     private static IGestion gestion;
 
     private GestionImpl() {}
