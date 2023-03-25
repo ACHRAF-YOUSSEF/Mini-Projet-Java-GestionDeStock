@@ -199,7 +199,7 @@ public class Cassiere extends JFrame {
                         JOptionPane.showMessageDialog(
                                 Cassiere.this,
                                 "erreur de saisie:\n"
-                                        + ""
+                                        + "déjà ajouté"
                         );
                     } else {
                         if (produit != null && inventaire != null) {
@@ -230,21 +230,21 @@ public class Cassiere extends JFrame {
                                         JOptionPane.showMessageDialog(
                                                 Cassiere.this,
                                                 "erreur de saisie:\n"
-                                                        + ""
+                                                        + "prix non valide!"
                                         );
                                     }
                                 } else {
                                     JOptionPane.showMessageDialog(
                                             Cassiere.this,
                                             "erreur de saisie:\n"
-                                                    + ""
+                                                    + "quantite non valide!"
                                     );
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(
                                         Cassiere.this,
                                         "erreur de saisie:\n"
-                                        + ""
+                                        + "stock invalide!"
                                 );
                             }
                         }
