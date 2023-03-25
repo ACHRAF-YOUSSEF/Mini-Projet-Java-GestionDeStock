@@ -15,8 +15,6 @@ import java.util.List;
 
 public class Stocker extends JFrame {
     // components
-    // SimpleDateFormat
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     // JDateChooser : site -> https://toedter.com/jcalendar/
     private final JDateChooser calendar = new JDateChooser();
     // JPanel

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableModeleCaissiereTable2 extends AbstractTableModel {
-    private IGestion gestion = GestionImpl.getGestion();
+    private final IGestion gestion = GestionImpl.getGestion();
     private List<Inventaire> inventaires = new ArrayList<>();
     private final String[] titres = {
             "Code Produit",
@@ -32,13 +32,15 @@ public class TableModeleCaissiereTable2 extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        final int code_produit = inventaires.get(rowIndex).getCode_produit();
+
         return switch (columnIndex) {
-            case 0 -> inventaires.get(rowIndex).getCode_produit();
-            case 1 -> gestion.getProduit(inventaires.get(rowIndex).getCode_produit()).getNom();
-            case 2 -> gestion.getProduit(inventaires.get(rowIndex).getCode_produit()).getCategorie();
-            case 4 -> inventaires.get(rowIndex).getQuantite();
-            case 5 -> gestion.getProduit(inventaires.get(rowIndex).getCode_produit()).getPrix();
-            case 6 -> inventaires.get(rowIndex).getQuantite() * gestion.getProduit(inventaires.get(rowIndex).getCode_produit()).getPrix();
+            case 0 -> code_produit;
+            case 1 -> gestion.getProduit(code_produit).getNom();
+            case 2 -> gestion.getProduit(code_produit).getCategorie();
+            case 3 -> inventaires.get(rowIndex).getQuantite();
+            case 4 -> gestion.getProduit(code_produit).getPrix();
+            case 5 -> Math.round(inventaires.get(rowIndex).getQuantite() * gestion.getProduit(code_produit).getPrix());
             default -> null;
         };
     }

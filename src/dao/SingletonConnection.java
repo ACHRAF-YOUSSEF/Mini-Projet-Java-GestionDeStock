@@ -12,9 +12,11 @@ public class SingletonConnection {
             Class.forName("com.mysql.jdbc.Driver");
 
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost/gestion_de_stock",
+                    .getConnection(
+                            "jdbc:mysql://localhost/gestion_de_stock",
                             "root",
-                            "admin");
+                            "admin"
+                    );
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

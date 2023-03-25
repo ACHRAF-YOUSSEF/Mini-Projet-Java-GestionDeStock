@@ -112,7 +112,7 @@ public class Cassiere extends JFrame {
 
         // getting the list of Inventaire and updating the TableModeleCaissiereTable1's and TableModeleCaissiereTable2's data:
         me1.chargerTable(gestion.getAllInventaire());
-        me2.chargerTable(gestion.getAllInventaire());
+        me2.chargerTable(gestion.getAllInventaire_());
 
         // setting the fonts + colors:
         //fonts
@@ -170,9 +170,15 @@ public class Cassiere extends JFrame {
 
             me1.chargerTable(list);
         });
-        print.addActionListener(e -> {});
-        insertCommande.addActionListener(e -> {});
-        annulerCommande.addActionListener(e -> {});
+        print.addActionListener(e -> {
+
+        });
+        insertCommande.addActionListener(e -> {
+
+        });
+        annulerCommande.addActionListener(e -> {
+
+        });
         annuler.addActionListener(e -> {
             me2.chargerTable(new ArrayList<>());
         });

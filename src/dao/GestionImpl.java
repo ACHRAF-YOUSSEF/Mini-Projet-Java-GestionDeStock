@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestionImpl implements IGestion {
-    private List<Inventaire> inventaires = new ArrayList<>();
+    private final List<Inventaire> inventaires = new ArrayList<>();
     private static IGestion gestion;
 
     private GestionImpl() {}
@@ -432,22 +432,12 @@ public class GestionImpl implements IGestion {
     }
 
     @Override
-    public List<Inventaire> getAllProduits() {
-        return null;
+    public List<Inventaire> getAllInventaire_() {
+        return inventaires;
     }
 
     @Override
-    public List<Inventaire> getProduitsPMC(String mc) {
+    public Inventaire ajouterInventaire(Inventaire i) {
         return null;
-    }
-
-    @Override
-    public List<Inventaire> getAllProduits_() {
-        return null;
-    }
-
-    @Override
-    public void ajouterInventaire(Inventaire i) {
-
     }
 }
