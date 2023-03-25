@@ -27,6 +27,6 @@ public interface IGestion {
 
     List<Inventaire> getAllInventaire_();
     Inventaire ajouterInventaire(Inventaire inventaire);
-    void popInventaire();
+    List<Inventaire> popInventaire();
     void imprimer();
 }

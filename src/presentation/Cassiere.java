@@ -3,6 +3,7 @@ package presentation;
 import dao.GestionImpl;
 import dao.IGestion;
 import metier.entity.Inventaire;
+import metier.entity.Produit;
 import presentation.tableModeles.TableModeleCaissiereTable1;
 import presentation.tableModeles.TableModeleCaissiereTable2;
 
@@ -174,10 +175,99 @@ public class Cassiere extends JFrame {
 
         });
         insertCommande.addActionListener(e -> {
+            if (
+                    codeProduitJTextField.getText().equals("")
+                    || stockDisponibleJTextField.getText().equals("")
+                    || prixJTextField.getText().equals("")
+                    || quantiteJTextField.getText().equals("")
+            ) {
+                JOptionPane.showMessageDialog(
+                    Cassiere.this,
+                        "erreur de saisie"
+                );
+            } else {
+                try {
+                    int code = Integer.parseInt(codeProduitJTextField.getText());
+                    int stock = Integer.parseInt(stockDisponibleJTextField.getText());
+                    int qty = Integer.parseInt(quantiteJTextField.getText());
+                    double prix = Double.parseDouble(prixJTextField.getText());
 
+                    Produit produit = gestion.getProduit(code);
+                    Inventaire inventaire = gestion.getInventaire(code);
+
+                    if (gestion.getAllInventaire_().contains(inventaire)) {
+                        JOptionPane.showMessageDialog(
+                                Cassiere.this,
+                                "erreur de saisie:\n"
+                                        + ""
+                        );
+                    } else {
+                        if (produit != null && inventaire != null) {
+                            if (stock == inventaire.getQuantite()) {
+                                if (qty > 0 && qty <= stock) {
+                                    if (prix == produit.getPrix()) {
+                                        Inventaire inventaire2 = new Inventaire(
+                                                code,
+                                                0,
+                                                inventaire.getIdTransaction(),
+                                                inventaire.getRemarques(),
+                                                inventaire.getDate()
+                                        );
+                                        inventaire2.setInventaireID(inventaire.getInventaireID());
+                                        inventaire2.setQuantite(inventaire.getQuantite() - qty);
+
+                                        inventaire.setQuantite(qty);
+
+                                        Inventaire inventaire1 = gestion.ajouterInventaire(inventaire);
+
+                                       if (inventaire1 != null) {
+                                           me2.chargerTable(gestion.getAllInventaire_());
+
+                                           gestion.destocker(inventaire2);
+                                           me1.chargerTable(gestion.getAllInventaire());
+                                       }
+                                    } else {
+                                        JOptionPane.showMessageDialog(
+                                                Cassiere.this,
+                                                "erreur de saisie:\n"
+                                                        + ""
+                                        );
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(
+                                            Cassiere.this,
+                                            "erreur de saisie:\n"
+                                                    + ""
+                                    );
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(
+                                        Cassiere.this,
+                                        "erreur de saisie:\n"
+                                        + ""
+                                );
+                            }
+                        }
+                    }
+                } catch (NumberFormatException e1) {
+                    JOptionPane.showMessageDialog(
+                            Cassiere.this,
+                            "erreur de saisie:\n"
+                                    + e1.getMessage()
+                    );
+                }
+            }
         });
         annulerCommande.addActionListener(e -> {
+            if (!gestion.getAllInventaire_().isEmpty()) {
+                Inventaire inventaire = gestion.getAllInventaire_().get(0);
 
+                inventaire.setQuantite(gestion.getInventaire(inventaire.getCode_produit()).getQuantite() + inventaire.getQuantite());
+
+                gestion.stocker(inventaire);
+                me2.chargerTable(gestion.popInventaire());
+                me1.chargerTable(gestion.getAllInventaire());
+            }
         });
         annuler.addActionListener(e -> {
             me2.chargerTable(new ArrayList<>());

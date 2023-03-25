@@ -437,13 +437,19 @@ public class GestionImpl implements IGestion {
     }
 
     @Override
-    public Inventaire ajouterInventaire(Inventaire i) {
-        return null;
+    public Inventaire ajouterInventaire(Inventaire inventaire) {
+        if (inventaire != null) {
+            inventaires.add(inventaire);
+        }
+
+        return inventaire;
     }
 
     @Override
-    public void popInventaire() {
+    public List<Inventaire> popInventaire() {
+        inventaires.remove(0);
 
+        return inventaires;
     }
 
     @Override
