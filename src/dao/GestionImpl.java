@@ -440,4 +440,14 @@ public class GestionImpl implements IGestion {
     public Inventaire ajouterInventaire(Inventaire i) {
         return null;
     }
+
+    @Override
+    public void popInventaire() {
+
+    }
+
+    @Override
+    public void imprimer() {
+
+    }
 }
