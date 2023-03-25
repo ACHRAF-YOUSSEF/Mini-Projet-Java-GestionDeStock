@@ -26,5 +26,7 @@ public interface IGestion {
     List<Inventaire> getInventairePMC(String mc);
 
     List<Inventaire> getAllInventaire_();
-    Inventaire ajouterInventaire(Inventaire i);
+    Inventaire ajouterInventaire(Inventaire inventaire);
+    void popInventaire();
+    void imprimer();
 }
