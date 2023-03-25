@@ -136,8 +136,7 @@ public class GererUtilisateur extends JFrame {
         });
         ajouter.addActionListener(e -> {
             if (
-                idTextField.getText().equals("")
-                || nomTextField.getText().equals("")
+                nomTextField.getText().equals("")
                 || String.valueOf(passwordField.getPassword()).equals("")
                 || !String.valueOf(passwordField.getPassword()).equals(String.valueOf(confirmPasswordField.getPassword()))
             ) {

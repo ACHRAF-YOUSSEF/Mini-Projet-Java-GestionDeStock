@@ -14,16 +14,16 @@ public class LoginImpl implements ILogin {
         Connection cx = SingletonConnection.getInstance();
 
         try {
-            PreparedStatement ps = cx.prepareStatement("select * from utilisateur");
+            PreparedStatement ps = cx.prepareStatement("select * from utilisateur where nom= ? and mot_de_pass= ? and admin=?");
+
+            ps.setInt(3, u.getAdmin());
+            ps.setString(1, u.getNom());
+            ps.setString(2, u.getMot_de_pass());
+
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                Utilisateur utilisateur = new Utilisateur(rs.getString(2), rs.getString(3), rs.getInt(4));
-                utilisateur.setId(rs.getInt(1));
-
-                if (utilisateur.equals(u)) {
-                    return true;
-                }
+            if (rs.next()) {
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
