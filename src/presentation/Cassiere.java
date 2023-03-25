@@ -8,13 +8,16 @@ import presentation.tableModeles.TableModeleCaissiereTable2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cassiere extends JFrame {
     // components
     // JPanel
-    private final JPanel prixTotaleJPanel = new JPanel(new GridLayout(1, 1));
-    private final JPanel argentARetournerJPanel = new JPanel(new GridLayout(1, 1));
+    private final JPanel prixTotaleJPanel = new JPanel(new BorderLayout(10, 10));
+    private final JPanel prixTotaleJPanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    private final JPanel argentARetournerJPanel = new JPanel(new BorderLayout(10, 10));
+    private final JPanel argentARetournerJPanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private final JPanel tableJPanel1 = new JPanel(new GridLayout(1, 1));
     private final JPanel tableJPanel2 = new JPanel(new GridLayout(1, 1));
     // JLabels
@@ -48,7 +51,7 @@ public class Cassiere extends JFrame {
     private final JButton rechercher = new JButton();
     private final JButton insertCommande = new JButton("Insérer La Commande");
     private final JButton annulerCommande = new JButton("Annuler La Commande");
-    private final JButton annuler = new JButton("Annuler");
+    private final JButton annuler = new JButton("Effacer");
     private final JButton print = new JButton("Imprimer");
     // IGestion
     private final IGestion gestion = GestionImpl.getGestion();
@@ -82,20 +85,6 @@ public class Cassiere extends JFrame {
         // resizing the icons:
         settingsIcon = Utils.resizeImageIcon(settingsIcon, 50, 50);
         findIcon = Utils.resizeImageIcon(findIcon, 40, 40);
-        leftArrowJLabel.setFont(new Font(null, Font.PLAIN, 40));
-        codeProduitJLabel.setFont(new Font(null, Font.PLAIN, 20));
-        stockDisponibleJLabel.setFont(new Font(null, Font.PLAIN, 20));
-        nomProduitJLabel.setFont(new Font(null, Font.PLAIN, 20));
-        categorieJLabel.setFont(new Font(null, Font.PLAIN, 20));
-        prixJLabel.setFont(new Font(null, Font.PLAIN, 20));
-        quantiteJLabel.setFont(new Font(null, Font.PLAIN, 20));
-        rechercherTextField.setFont(new Font(null, Font.PLAIN, 15));
-        codeProduitJTextField.setFont(new Font(null, Font.PLAIN, 15));
-        stockDisponibleJTextField.setFont(new Font(null, Font.PLAIN, 15));
-        nomProduitJTextField.setFont(new Font(null, Font.PLAIN, 15));
-        categorieJTextFieldl.setFont(new Font(null, Font.PLAIN, 15));
-        prixJTextField.setFont(new Font(null, Font.PLAIN, 15));
-        quantiteJTextField.setFont(new Font(null, Font.PLAIN, 15));
 
         // adding the ImageIcons to the JButtons:
         paramtres.setIcon(settingsIcon);
@@ -104,6 +93,10 @@ public class Cassiere extends JFrame {
         // setting focusable for the JButtons
         paramtres.setFocusable(false);
         rechercher.setFocusable(false);
+        insertCommande.setFocusable(false);
+        annulerCommande.setFocusable(false);
+        annuler.setFocusable(false);
+        print.setFocusable(false);
 
         //  making the borders and the background transparent for the paramtres JButton:
         paramtres.setBorder(BorderFactory.createLineBorder(new Color(0,0, 0, Transparency.TRANSLUCENT)));
@@ -124,12 +117,34 @@ public class Cassiere extends JFrame {
         // setting the fonts + colors:
         //fonts
         titreJLabel.setFont(new Font(null, Font.PLAIN, 50));
+        argentTotaleJLabel.setFont(new Font(null, Font.PLAIN, 20));
+        prixTotaleJLabel1.setFont(new Font(null, Font.PLAIN, 20));
+        prixTotaleJLabel2.setFont(new Font(null, Font.PLAIN, 20));
+        argentARetournerJLabel1.setFont(new Font(null, Font.PLAIN, 20));
+        argentARetournerJLabel2.setFont(new Font(null, Font.PLAIN, 20));
+        argentTotaleJTextField.setFont(new Font(null, Font.PLAIN, 15));
         paramtres.setFont(new Font(null, Font.PLAIN, 20));
+        leftArrowJLabel.setFont(new Font(null, Font.PLAIN, 40));
+        codeProduitJLabel.setFont(new Font(null, Font.PLAIN, 20));
+        stockDisponibleJLabel.setFont(new Font(null, Font.PLAIN, 20));
+        nomProduitJLabel.setFont(new Font(null, Font.PLAIN, 20));
+        categorieJLabel.setFont(new Font(null, Font.PLAIN, 20));
+        prixJLabel.setFont(new Font(null, Font.PLAIN, 20));
+        quantiteJLabel.setFont(new Font(null, Font.PLAIN, 20));
+        rechercherTextField.setFont(new Font(null, Font.PLAIN, 15));
+        codeProduitJTextField.setFont(new Font(null, Font.PLAIN, 15));
+        stockDisponibleJTextField.setFont(new Font(null, Font.PLAIN, 15));
+        nomProduitJTextField.setFont(new Font(null, Font.PLAIN, 15));
+        categorieJTextFieldl.setFont(new Font(null, Font.PLAIN, 15));
+        prixJTextField.setFont(new Font(null, Font.PLAIN, 15));
+        quantiteJTextField.setFont(new Font(null, Font.PLAIN, 15));
 
         // colors (Foreground + Background)
         // Foreground
         paramtres.setForeground(Color.WHITE);
         rechercherTextField.setForeground(Color.WHITE);
+        argentTotaleJLabel.setForeground(Color.WHITE);
+        argentTotaleJTextField.setForeground(Color.WHITE);
         titreJLabel.setForeground(Color.WHITE);
         leftArrowJLabel.setForeground(Color.WHITE);
         codeProduitJLabel.setForeground(Color.WHITE);
@@ -154,6 +169,12 @@ public class Cassiere extends JFrame {
             List<Inventaire> list = gestion.getInventairePMC(rechercherTextField.getText());
 
             me1.chargerTable(list);
+        });
+        print.addActionListener(e -> {});
+        insertCommande.addActionListener(e -> {});
+        annulerCommande.addActionListener(e -> {});
+        annuler.addActionListener(e -> {
+            me2.chargerTable(new ArrayList<>());
         });
 
         // setting the bounds of the components:
@@ -243,9 +264,57 @@ public class Cassiere extends JFrame {
         );
         tableJPanel2.setBounds(
                 xSize - 700,
-                350,
+                250,
                 650,
                 (ySize - taskBarSize) - 500
+        );
+        argentTotaleJLabel.setBounds(
+                tableJPanel2.getX(),
+                tableJPanel2.getY() + tableJPanel2.getHeight() + 10,
+                140,
+                40
+        );
+        argentTotaleJTextField.setBounds(
+                argentTotaleJLabel.getX() + argentTotaleJLabel.getWidth(),
+                argentTotaleJLabel.getY(),
+                140,
+                40
+        );
+        prixTotaleJPanel.setBounds(
+                argentTotaleJLabel.getX(),
+                argentTotaleJLabel.getY() + argentTotaleJLabel.getHeight() + 10,
+                argentTotaleJLabel.getWidth() + argentTotaleJTextField.getWidth(),
+                140
+        );
+        argentARetournerJPanel.setBounds(
+                prixTotaleJPanel.getX() + prixTotaleJPanel.getWidth() + 10,
+                prixTotaleJPanel.getY(),
+                prixTotaleJPanel.getWidth(),
+                140
+        );
+        print.setBounds(
+                argentARetournerJPanel.getX() + argentARetournerJPanel.getWidth() + 10,
+                argentARetournerJPanel.getY() - 30,
+                90,
+                170
+        );
+        insertCommande.setBounds(
+                tableJPanel2.getX(),
+                tableJPanel2.getY() - 50,
+                160,
+                40
+        );
+        annulerCommande.setBounds(
+                insertCommande.getX() + insertCommande.getWidth() + 10,
+                insertCommande.getY(),
+                180,
+                insertCommande.getHeight()
+        );
+        annuler.setBounds(
+                annulerCommande.getX() + annulerCommande.getWidth() + 10,
+                annulerCommande.getY(),
+                100,
+                annulerCommande.getHeight()
         );
         tableJPanel1.setBounds(
                 20,
@@ -255,7 +324,7 @@ public class Cassiere extends JFrame {
         );
         leftArrowJLabel.setBounds(
                 tableJPanel1.getX() + tableJPanel1.getWidth() + 50,
-                tableJPanel1.getY() + (tableJPanel1.getHeight() / 2),
+                tableJPanel1.getY() + (tableJPanel1.getHeight() / 2) - 50,
                 200,
                 40
         );
@@ -297,6 +366,17 @@ public class Cassiere extends JFrame {
         argentTotaleJTextField.setBorder(
                 BorderFactory.createMatteBorder(0, 0, 1, 0 , Color.BLACK)
         );
+
+        // adding components to the JPanels:
+        argentARetournerJPanel2.add(argentARetournerJLabel2);
+
+        argentARetournerJPanel.add(argentARetournerJLabel1, BorderLayout.NORTH);
+        argentARetournerJPanel.add(argentARetournerJPanel2);
+
+        prixTotaleJPanel2.add(prixTotaleJLabel2);
+
+        prixTotaleJPanel.add(prixTotaleJLabel1, BorderLayout.NORTH);
+        prixTotaleJPanel.add(prixTotaleJPanel2);
 
         // adding the JScrollPanes to the tableJPanel1 and 2 JPanels:
         tableJPanel1.add(jsp1);
