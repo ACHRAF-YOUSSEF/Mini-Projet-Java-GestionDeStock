@@ -177,7 +177,22 @@ public class Cassiere extends JFrame {
 
         });
         submit.addActionListener(e ->  {
+            try {
+                double prixTotale = Double.parseDouble(prixTotaleJLabel2.getText());
+                double money = Double.parseDouble(argentTotaleJTextField.getText());
 
+                if (money >= prixTotale) {
+                    argentARetournerJLabel2.setText(String.valueOf(money - prixTotale));
+                } else {
+                    JOptionPane.showMessageDialog(
+                            Cassiere.this,
+                            "erreur de saisie"
+                    );
+                }
+
+            } catch (NumberFormatException e1) {
+                e1.printStackTrace();
+            }
         });
         insertCommande.addActionListener(e -> {
             if (
