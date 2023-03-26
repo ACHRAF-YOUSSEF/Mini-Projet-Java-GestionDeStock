@@ -40,7 +40,7 @@ public class TableModeleCaissiereTable2 extends AbstractTableModel {
             case 2 -> gestion.getProduit(code_produit).getCategorie();
             case 3 -> inventaires.get(rowIndex).getQuantite();
             case 4 -> gestion.getProduit(code_produit).getPrix();
-            case 5 -> Math.round(inventaires.get(rowIndex).getQuantite() * gestion.getProduit(code_produit).getPrix());
+            case 5 -> inventaires.get(rowIndex).getQuantite() * gestion.getProduit(code_produit).getPrix();
             default -> null;
         };
     }

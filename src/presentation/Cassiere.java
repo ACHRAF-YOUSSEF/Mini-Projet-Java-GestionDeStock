@@ -54,6 +54,7 @@ public class Cassiere extends JFrame {
     private final JButton annulerCommande = new JButton("Annuler La Commande");
     private final JButton annuler = new JButton("Effacer");
     private final JButton print = new JButton("Imprimer");
+    private final JButton submit = new JButton("Soumettre");
     // IGestion
     private final IGestion gestion = GestionImpl.getGestion();
     // TableModeleCaissiereTable1
@@ -98,6 +99,7 @@ public class Cassiere extends JFrame {
         annulerCommande.setFocusable(false);
         annuler.setFocusable(false);
         print.setFocusable(false);
+        submit.setFocusable(false);
 
         //  making the borders and the background transparent for the paramtres JButton:
         paramtres.setBorder(BorderFactory.createLineBorder(new Color(0,0, 0, Transparency.TRANSLUCENT)));
@@ -174,6 +176,9 @@ public class Cassiere extends JFrame {
         print.addActionListener(e -> {
 
         });
+        submit.addActionListener(e ->  {
+
+        });
         insertCommande.addActionListener(e -> {
             if (
                     codeProduitJTextField.getText().equals("")
@@ -223,6 +228,14 @@ public class Cassiere extends JFrame {
                                        if (inventaire1 != null) {
                                            me2.chargerTable(gestion.getAllInventaire_());
 
+                                           try {
+                                               double prixTotale = Double.parseDouble(prixTotaleJLabel2.getText());
+
+                                               prixTotaleJLabel2.setText(String.valueOf(prixTotale + (qty * prix)));
+                                           } catch (NumberFormatException e1) {
+                                               e1.printStackTrace();
+                                           }
+
                                            gestion.destocker(inventaire2);
                                            me1.chargerTable(gestion.getAllInventaire());
                                        }
@@ -261,8 +274,19 @@ public class Cassiere extends JFrame {
         annulerCommande.addActionListener(e -> {
             if (!gestion.getAllInventaire_().isEmpty()) {
                 Inventaire inventaire = gestion.getAllInventaire_().get(0);
+                int qty_ = gestion.getInventaire(inventaire.getCode_produit()).getQuantite();
+                int qty = inventaire.getQuantite();
+                double prix = gestion.getProduit(inventaire.getCode_produit()).getPrix();
 
-                inventaire.setQuantite(gestion.getInventaire(inventaire.getCode_produit()).getQuantite() + inventaire.getQuantite());
+                inventaire.setQuantite(qty_ + qty);
+
+                try {
+                    double prixTotale = Double.parseDouble(prixTotaleJLabel2.getText());
+
+                    prixTotaleJLabel2.setText(String.valueOf(prixTotale - (qty * prix)));
+                } catch (NumberFormatException e1) {
+                    e1.printStackTrace();
+                }
 
                 gestion.stocker(inventaire);
                 me2.chargerTable(gestion.popInventaire());
@@ -388,6 +412,12 @@ public class Cassiere extends JFrame {
                 prixTotaleJPanel.getWidth(),
                 140
         );
+        submit.setBounds(
+                argentARetournerJPanel.getX(),
+                argentARetournerJPanel.getY() - 50,
+                100,
+                40
+        );
         print.setBounds(
                 argentARetournerJPanel.getX() + argentARetournerJPanel.getWidth() + 10,
                 argentARetournerJPanel.getY() - 30,
@@ -506,6 +536,7 @@ public class Cassiere extends JFrame {
         this.add(argentTotaleJLabel);
         this.add(argentTotaleJTextField);
         this.add(print);
+        this.add(submit);
 
         // setup JFrame:
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
