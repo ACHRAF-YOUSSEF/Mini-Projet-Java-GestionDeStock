@@ -15,7 +15,7 @@ public class SingletonConnection {
                     .getConnection(
                             "jdbc:mysql://localhost/gestion_de_stock",
                             "root",
-                            "admin"
+                            ""
                     );
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

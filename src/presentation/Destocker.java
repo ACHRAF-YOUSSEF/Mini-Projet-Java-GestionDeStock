@@ -31,8 +31,8 @@ public class Destocker extends JFrame {
         "non périmé"
     });
     // ImageIcons
-    private ImageIcon backIcon = new ImageIcon("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\images\\back.png");
-    private ImageIcon findIcon = new ImageIcon("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\images\\find.png");
+    private ImageIcon backIcon = new ImageIcon("src\\images\\back.png");
+    private ImageIcon findIcon = new ImageIcon("src\\images\\find.png");
     // JButtons
     private final JButton retour = new JButton();
     private final JButton rechercher = new JButton();
@@ -90,7 +90,7 @@ public class Destocker extends JFrame {
 
         // adding the ActionListener to the JButtons:
         retour.addActionListener(e -> {
-            new GererInventaire();
+            new presentation.GererInventaire_0();
             dispose();
         });
         rechercher.addActionListener(e -> {

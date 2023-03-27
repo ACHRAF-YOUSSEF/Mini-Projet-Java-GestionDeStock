@@ -3,8 +3,15 @@ package presentation;
 import javax.swing.*;
 import java.awt.*;
 
-public class GererInventaire extends JFrame {
+public class GererInventaire_0 extends JFrame {
     // components
+    // JPanels
+    // panelA = [titre : north + panelB : center]
+    private final JPanel panelA = new JPanel(new BorderLayout(10, 10));
+    // panelB = [stockIn : 1 + stockOut : 2]
+    private final JPanel panelB = new JPanel(new GridLayout(2, 1, 10, 10));
+    // panelC = [retour : 1]
+    private final JPanel panelC = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
     // JLabels
     private final JLabel titre = new JLabel("Gerer Inventaire");
     // ImageIcons
@@ -16,15 +23,15 @@ public class GererInventaire extends JFrame {
     private final JButton stockIn = new JButton("Stocker");
     private final JButton stockOut = new JButton("Destocker");
 
-    public GererInventaire() {
+    public GererInventaire_0() {
         // titre:
         super("GererInventaire");
 
-        // setting the Layout Manager for the JFrame
-        this.setLayout(null);
-
         // changing the Background of the JFrame:
         this.getContentPane().setBackground(Color.WHITE);
+        panelA.setBackground(Color.WHITE);
+        panelB.setBackground(Color.WHITE);
+        panelC.setBackground(Color.WHITE);
 
         // toolkit --> getting screen size (xSize, ySize) and tasBarSize:
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -87,40 +94,47 @@ public class GererInventaire extends JFrame {
         // Background:
         retour.setBackground(Color.WHITE);
 
-        // setting the bounds of the retour JButton:
-        retour.setBounds(40,
-                80,
-                100,
-                60
+        // adding components to the panelC:
+        panelC.add(retour);
+
+        // adding components to the panelB:
+        panelB.add(stockIn);
+        panelB.add(stockOut);
+
+        // adding components to the panelA:
+        panelA.add(titre, BorderLayout.NORTH);
+        panelA.add(panelB);
+
+        // setting borders
+        panelB.setBorder(
+                BorderFactory.createEmptyBorder(
+                        20,
+                        0,
+                        20,
+                        500
+                )
         );
-        titre.setBounds(
-                (xSize / 2) - 570,
-                120,
-                400,
-                80
-        );
-        stockIn.setBounds(
-                titre.getX(),
-                titre.getY() + titre.getHeight() + 20,
-                titre.getWidth(),
-                200
-        );
-        stockOut.setBounds(
-                titre.getX(),
-                stockIn.getY() + stockIn.getHeight() + 20,
-                titre.getWidth(),
-                200
+
+        panelA.setBorder(
+                BorderFactory.createEmptyBorder(
+                        20,
+                        200,
+                        20,
+                        300
+                )
         );
 
         // adding components to the JFrame:
-        this.add(retour);
-        this.add(titre);
-        this.add(stockIn);
-        this.add(stockOut);
+        this.add(panelC, BorderLayout.NORTH);
+        this.add(panelA);
 
         // setup JFrame:
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new GererInventaire_0();
     }
 }

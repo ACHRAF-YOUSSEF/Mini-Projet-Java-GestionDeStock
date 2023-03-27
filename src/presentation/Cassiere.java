@@ -36,8 +36,8 @@ public class Cassiere extends JFrame {
     private final JLabel argentARetournerJLabel1 = new JLabel("Argent A Retourner:");
     private final JLabel argentARetournerJLabel2 = new JLabel("0.0");
     // ImageIcons
-    private ImageIcon settingsIcon = new ImageIcon("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\images\\settings.png");
-    private ImageIcon findIcon = new ImageIcon("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\images\\find.png");
+    private ImageIcon settingsIcon = new ImageIcon("src\\images\\settings.png");
+    private ImageIcon findIcon = new ImageIcon("src\\images\\find.png");
     // JTextFields
     private final JTextField rechercherTextField = new JTextField();
     private final JTextField codeProduitJTextField = new JTextField();
@@ -308,9 +308,7 @@ public class Cassiere extends JFrame {
                 me1.chargerTable(gestion.getAllInventaire());
             }
         });
-        annuler.addActionListener(e -> {
-            me2.chargerTable(new ArrayList<>());
-        });
+        annuler.addActionListener(e -> me2.chargerTable(new ArrayList<>()));
 
         // setting the bounds of the components:
         paramtres.setBounds(
@@ -557,9 +555,5 @@ public class Cassiere extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new Cassiere();
     }
 }

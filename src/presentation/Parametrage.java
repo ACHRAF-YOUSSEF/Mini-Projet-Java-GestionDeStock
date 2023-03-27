@@ -10,7 +10,7 @@ public class Parametrage extends JFrame {
     // JLabels
     private final JLabel titre = new JLabel("Parametrage");
     // ImageIcons
-    private ImageIcon backIcon = new ImageIcon("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\images\\back.png");
+    private ImageIcon backIcon = new ImageIcon("src\\images\\back.png");
     // JButtons
     private final JButton retour = new JButton();
     private final JButton logout = new JButton("se déconnecter");
@@ -67,7 +67,7 @@ public class Parametrage extends JFrame {
             dispose();
         });
         logout.addActionListener(e -> {
-            new Login();
+            new Login_0();
             dispose();
         });
         about.addActionListener(e -> {

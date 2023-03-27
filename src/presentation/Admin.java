@@ -11,10 +11,10 @@ public class Admin extends JFrame {
     private Date date = new Date();
     // components
     // ImageIcons
-    private ImageIcon settingsIcon = new ImageIcon("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\images\\settings.png");
-    private ImageIcon userIcon = new ImageIcon("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\images\\user.png");
-    private ImageIcon ajouterIcon = new ImageIcon("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\images\\ajouter.png");
-    private ImageIcon gererInventaireIcon = new ImageIcon("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\images\\gererInventaire.png");
+    private ImageIcon settingsIcon = new ImageIcon("src\\images\\settings.png");
+    private ImageIcon userIcon = new ImageIcon("src\\images\\user.png");
+    private ImageIcon ajouterIcon = new ImageIcon("src\\images\\ajouter.png");
+    private ImageIcon gererInventaireIcon = new ImageIcon("src\\images\\gererInventaire.png");
     // JButtons
     private final JButton paramtres = new JButton("parametres");
     private final JButton ajoutProduit = new JButton("ajout produit");
@@ -117,7 +117,7 @@ public class Admin extends JFrame {
             dispose();
         });
         gererInventaire.addActionListener(e -> {
-            new GererInventaire();
+            new GererInventaire_0();
             dispose();
         });
 

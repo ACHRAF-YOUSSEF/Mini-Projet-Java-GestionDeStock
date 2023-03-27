@@ -5,14 +5,14 @@ CREATE TABLE `utilisateur` (
   `mot_de_pass` varchar(45) DEFAULT NULL,
   `admin` tinyint DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 CREATE TABLE `produit` (
   `code_produit` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) DEFAULT NULL,
   `categorie` varchar(45) DEFAULT NULL,
   `prix` double DEFAULT NULL,
   PRIMARY KEY (`code_produit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 CREATE TABLE `inventaire` (
   `inventaireID` int NOT NULL AUTO_INCREMENT,
   `code_produit` int NOT NULL,
@@ -23,4 +23,4 @@ CREATE TABLE `inventaire` (
   PRIMARY KEY (`inventaireID`,`code_produit`),
   KEY `cp_idx` (`code_produit`),
   CONSTRAINT `cp` FOREIGN KEY (`code_produit`) REFERENCES `produit` (`code_produit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);

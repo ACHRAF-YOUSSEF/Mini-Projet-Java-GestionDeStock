@@ -26,8 +26,8 @@ public class AjoutProduit extends JFrame {
     private final JTextField categorieTextField = new JTextField();
     private final JTextField prixTextField = new JTextField();
     // ImageIcons
-    private ImageIcon backIcon = new ImageIcon("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\images\\back.png");
-    private ImageIcon findIcon = new ImageIcon("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\images\\find.png");
+    private ImageIcon backIcon = new ImageIcon("src\\images\\back.png");
+    private ImageIcon findIcon = new ImageIcon("src\\images\\find.png");
     // JButtons
     private final JButton retour = new JButton();
     private final JButton rechercher = new JButton();
