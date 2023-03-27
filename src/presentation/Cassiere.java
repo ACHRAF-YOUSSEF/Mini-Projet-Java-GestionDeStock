@@ -165,7 +165,7 @@ public class Cassiere extends JFrame {
 
         // adding the ActionListener to the JButtons:
         paramtres.addActionListener(e -> {
-            new Parametrage(false);
+            new Parametrage_0(false);
             dispose();
         });
         rechercher.addActionListener(e -> {

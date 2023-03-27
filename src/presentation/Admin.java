@@ -105,7 +105,7 @@ public class Admin extends JFrame {
 
         // adding the ActionListener to the JButtons:
         paramtres.addActionListener(e -> {
-            new Parametrage(true);
+            new Parametrage_0(true);
             dispose();
         });
         ajoutProduit.addActionListener(e -> {

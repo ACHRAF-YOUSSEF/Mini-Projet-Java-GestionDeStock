@@ -3,9 +3,20 @@ package presentation;
 import javax.swing.*;
 import java.awt.*;
 
-public class Parametrage extends JFrame {
+public class Parametrage_0 extends JFrame {
     // components
     // JPanels
+    // buttonsPanel = [about : 1 + dev : 2]
+    private final JPanel buttonsPanel = new JPanel(new GridLayout(2, 1, 20, 20));
+    // sidePanel = [titre : north + buttonsPanel : center]
+    private final JPanel sidePanel = new JPanel(new BorderLayout(10, 10));
+    // bodyPanel = [sidePanel : west + panel : center]
+    private final JPanel bodyPanel = new JPanel(new BorderLayout(10, 10));
+    // panelRetour = [retour : 1]
+    private final JPanel panelRetour = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    // panelLogout = [logout : 1]
+    private final JPanel panelLogout = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    // panel = [scrollPane : 1]
     private final JPanel panel = new JPanel(new GridLayout(1, 1));
     // JLabels
     private final JLabel titre = new JLabel("Parametrage");
@@ -23,15 +34,17 @@ public class Parametrage extends JFrame {
     // String
     private String text;
 
-    public Parametrage(boolean isAdmin) {
+    public Parametrage_0(boolean isAdmin) {
         // titre:
         super("Parametrage");
 
-        // setting the Layout Manager for the JFrame
-        this.setLayout(null);
-
         // changing the Background of the JFrame:
         this.getContentPane().setBackground(Color.WHITE);
+        panelRetour.setBackground(Color.WHITE);
+        panelLogout.setBackground(Color.WHITE);
+        buttonsPanel.setBackground(Color.WHITE);
+        bodyPanel.setBackground(Color.WHITE);
+        sidePanel.setBackground(Color.WHITE);
 
         // toolkit --> getting screen size (xSize, ySize) and tasBarSize:
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -112,50 +125,40 @@ public class Parametrage extends JFrame {
         about.setBackground(Color.GREEN);
         dev.setBackground(Color.GRAY);
 
-        // setting the bounds of the components:
-        retour.setBounds(
-                40,
-                80,
-                100,
-                60
-        );
-        titre.setBounds(
-                (xSize / 2) - 570,
-                120,
-                400,
-                80
-        );
-        about.setBounds(
-                titre.getX(),
-                titre.getY() + titre.getHeight() + 20,
-                titre.getWidth() - 50,
-                80
-        );
-        dev.setBounds(
-                about.getX(),
-                about.getY() + about.getHeight() + 20,
-                titre.getWidth() - 50,
-                80
-        );
-        logout.setBounds(
-                xSize - 220,
-                retour.getY(),
-                180,
-                60
-        );
-        panel.setBounds(
-                dev.getX() + dev.getWidth() + 20,
-                titre.getY(),
-                730,
-                (ySize - taskBarSize) - 180
-        );
-
         // adding border to the JPanels and JScrollPanes:
         panel.setBorder(
-                BorderFactory.createMatteBorder(0, 1, 0, 0 , Color.BLACK)
+                BorderFactory.createMatteBorder(
+                        0,
+                        1,
+                        0,
+                        0 ,
+                        Color.BLACK
+                )
         );
         scrollPane.setBorder(
-                BorderFactory.createMatteBorder(0, 1, 0, 0 , Color.BLACK)
+                BorderFactory.createMatteBorder(
+                        0,
+                        1,
+                        0,
+                        0 ,
+                        Color.BLACK
+                )
+        );
+        sidePanel.setBorder(
+                BorderFactory.createEmptyBorder(
+                        50,
+                        200,
+                        100,
+                        20
+                )
+        );
+        buttonsPanel.setBorder(
+                BorderFactory.createEmptyBorder(
+                        20,
+                        20,
+                        200,
+                        20
+                )
         );
 
         // text init
@@ -182,13 +185,28 @@ public class Parametrage extends JFrame {
         // adding components to the JPanel 'panel'
         panel.add(scrollPane);
 
+        // adding components to the panelRetour JPanel:
+        panelRetour.add(retour);
+
+        // adding components to the panelLogout JPanel:
+        panelLogout.add(logout);
+
+        // adding components to the buttonsPanel JPanel:
+        buttonsPanel.add(about);
+        buttonsPanel.add(dev);
+
+        // adding components to the sidePanel JPanel:
+        sidePanel.add(titre, BorderLayout.NORTH);
+        sidePanel.add(buttonsPanel);
+
+        // adding components to the bodyPanel JPanel:
+        bodyPanel.add(scrollPane);
+        bodyPanel.add(sidePanel, BorderLayout.WEST);
+
         // adding components to the JFrame:
-        this.add(retour);
-        this.add(titre);
-        this.add(logout);
-        this.add(about);
-        this.add(dev);
-        this.add(panel);
+        this.add(panelRetour, BorderLayout.NORTH);
+        this.add(panelLogout, BorderLayout.EAST);
+        this.add(bodyPanel);
 
         // setup JFrame:
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -197,6 +215,6 @@ public class Parametrage extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Parametrage(true);
+        new Parametrage_0(true);
     }
 }
