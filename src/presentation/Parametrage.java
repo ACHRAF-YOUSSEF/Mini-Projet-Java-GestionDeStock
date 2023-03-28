@@ -195,8 +195,4 @@ public class Parametrage extends JFrame {
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
     }
-
-    public static void main(String[] args) {
-        new Parametrage(true);
-    }
 }
