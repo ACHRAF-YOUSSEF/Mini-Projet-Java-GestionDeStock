@@ -161,7 +161,7 @@ public class Admin extends JFrame {
 
         // updating the date using a Timer
         javax.swing.Timer timer = new javax.swing.Timer(0, e -> {
-            date = new Date();
+            date.setTime(System.currentTimeMillis());
             time.setText(dateFormat.format(date));
         });
 
@@ -179,5 +179,9 @@ public class Admin extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Admin();
     }
 }
