@@ -31,7 +31,7 @@ public class GererUtilisateur extends JFrame {
     // JComboBox
     private final JComboBox<String> comboBox = new JComboBox<>(new String[] {
        "Admin",
-       "Cassiere"
+       "Caissiere"
     });
     // ImageIcons
     private ImageIcon backIcon = new ImageIcon("src\\images\\back.png");

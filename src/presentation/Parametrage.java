@@ -61,7 +61,7 @@ public class Parametrage extends JFrame {
             if (isAdmin) {
                 new Admin();
             } else {
-                new Cassiere();
+                new Caissiere();
             }
 
             dispose();

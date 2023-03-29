@@ -3,6 +3,7 @@ package dao;
 import metier.entity.Inventaire;
 import metier.entity.Produit;
 import metier.entity.Utilisateur;
+import presentation.Utils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -453,7 +454,7 @@ public class GestionImpl implements IGestion {
     }
 
     @Override
-    public void imprimer() {
-
+    public void imprimer(String FILE_NAME, List<Inventaire> list) {
+        Utils.generatePDF(FILE_NAME, list);
     }
 }

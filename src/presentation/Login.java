@@ -20,7 +20,7 @@ public class Login extends JFrame {
     // JComboBoxs:
     JComboBox<String> comboBox = new JComboBox<>(new String[] {
             "Admin",
-            "Cassiere"
+            "Caissiere"
     });
     // JButtons:
     private final JButton loginButton = new JButton("Login");
@@ -88,7 +88,7 @@ public class Login extends JFrame {
                     if (utilisateur.getAdmin() == 1) {
                         new Admin();
                     } else {
-                        new Cassiere();
+                        new Caissiere();
                     }
 
                     dispose();

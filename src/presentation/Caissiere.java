@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cassiere extends JFrame {
+public class Caissiere extends JFrame {
     // components
     // JPanel
     private final JPanel prixTotaleJPanel = new JPanel(new BorderLayout(10, 10));
@@ -23,7 +23,7 @@ public class Cassiere extends JFrame {
     private final JPanel tableJPanel2 = new JPanel(new GridLayout(1, 1));
     // JLabels
     private final JLabel leftArrowJLabel = new JLabel(">>>>>");
-    private final JLabel titreJLabel = new JLabel("Cassiere");
+    private final JLabel titreJLabel = new JLabel("Caissiere");
     private final JLabel codeProduitJLabel = new JLabel("Code Produit:");
     private final JLabel stockDisponibleJLabel = new JLabel("Stock Disponible:");
     private final JLabel nomProduitJLabel = new JLabel("Nom Produit:");
@@ -67,9 +67,9 @@ public class Cassiere extends JFrame {
     private final JScrollPane jsp1 = new JScrollPane(table1);
     private final JScrollPane jsp2 = new JScrollPane(table2);
 
-    public Cassiere() {
+    public Caissiere() {
         // titreJLabel:
-        super("Cassiere");
+        super("Caissiere");
 
         // setting the Layout Manager for the JFrame
         this.setLayout(null);
@@ -174,7 +174,7 @@ public class Cassiere extends JFrame {
             me1.chargerTable(list);
         });
         print.addActionListener(e -> {
-
+            gestion.imprimer("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\pdfs\\pdf_1.pdf", gestion.getAllInventaire_());
         });
         submit.addActionListener(e ->  {
             try {
@@ -185,7 +185,7 @@ public class Cassiere extends JFrame {
                     argentARetournerJLabel2.setText(String.valueOf(money - prixTotale));
                 } else {
                     JOptionPane.showMessageDialog(
-                            Cassiere.this,
+                            Caissiere.this,
                             "erreur de saisie"
                     );
                 }
@@ -202,7 +202,7 @@ public class Cassiere extends JFrame {
                     || quantiteJTextField.getText().equals("")
             ) {
                 JOptionPane.showMessageDialog(
-                    Cassiere.this,
+                    Caissiere.this,
                         "erreur de saisie"
                 );
             } else {
@@ -217,7 +217,7 @@ public class Cassiere extends JFrame {
 
                     if (gestion.getAllInventaire_().contains(inventaire)) {
                         JOptionPane.showMessageDialog(
-                                Cassiere.this,
+                                Caissiere.this,
                                 "erreur de saisie:\n"
                                         + "déjà ajouté"
                         );
@@ -256,21 +256,21 @@ public class Cassiere extends JFrame {
                                        }
                                     } else {
                                         JOptionPane.showMessageDialog(
-                                                Cassiere.this,
+                                                Caissiere.this,
                                                 "erreur de saisie:\n"
                                                         + "prix non valide!"
                                         );
                                     }
                                 } else {
                                     JOptionPane.showMessageDialog(
-                                            Cassiere.this,
+                                            Caissiere.this,
                                             "erreur de saisie:\n"
                                                     + "quantite non valide!"
                                     );
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(
-                                        Cassiere.this,
+                                        Caissiere.this,
                                         "erreur de saisie:\n"
                                         + "stock invalide!"
                                 );
@@ -279,7 +279,7 @@ public class Cassiere extends JFrame {
                     }
                 } catch (NumberFormatException e1) {
                     JOptionPane.showMessageDialog(
-                            Cassiere.this,
+                            Caissiere.this,
                             "erreur de saisie:\n"
                                     + e1.getMessage()
                     );
@@ -555,5 +555,9 @@ public class Cassiere extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Caissiere();
     }
 }
