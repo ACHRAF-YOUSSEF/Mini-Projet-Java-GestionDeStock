@@ -28,5 +28,5 @@ public interface IGestion {
     List<Inventaire> getAllInventaire_();
     Inventaire ajouterInventaire(Inventaire inventaire);
     List<Inventaire> popInventaire();
-    void imprimer(String FILE_NAME, List<Inventaire> list);
+    void imprimer(String FILE_NAME, List<Inventaire> list, double argent, double money);
 }

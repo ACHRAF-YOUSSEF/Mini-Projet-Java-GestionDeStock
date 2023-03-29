@@ -19,7 +19,7 @@ public class Utils {
         return new ImageIcon(imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 
-    public static boolean generatePDF(String FILE_NAME, List<Inventaire> list) {
+    public static boolean generatePDF(String FILE_NAME, List<Inventaire> list, double argent, double money) {
         if (FILE_NAME.equals("")) {
             FILE_NAME = "pdfs\\pdf_0.pdf";
         }
@@ -29,9 +29,10 @@ public class Utils {
         try {
             PdfWriter.getInstance(document, new FileOutputStream(FILE_NAME));
             document.open();
+            System.out.println("Writing Now!");
 
             Paragraph p = new Paragraph();
-            p.add("Text 1");
+            p.add("Facture");
             p.setAlignment(Element.ALIGN_CENTER);
             document.add(p);
             document.add(Chunk.NEWLINE);
@@ -40,12 +41,9 @@ public class Utils {
             font.setStyle(Font.BOLD);
             font.setSize(8);
 
-            float[] colsWidth1 = {
-                    1f, 1f, 1f, 1f,
-                    1f, 1f, 1f
-            };
-
-            PdfPTable table1 = new PdfPTable(colsWidth1);
+            PdfPTable table1 = new PdfPTable(new float[] {
+                    1f, 1f, 1f, 1f, 1f, 1f
+            });
 
             table1.setWidthPercentage(100);
             table1.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -56,6 +54,7 @@ public class Utils {
             Phrase quatite = new Phrase("Quatité", font);
             Phrase prix = new Phrase("Prix", font);
             Phrase totale = new Phrase("Totale", font);
+            Phrase argentP = new Phrase("Argent Totale", font);
             Phrase argentARetourner = new Phrase("Argent A Retourner", font);
 
             table1.addCell(code_produit);
@@ -64,7 +63,10 @@ public class Utils {
             table1.addCell(quatite);
             table1.addCell(prix);
             table1.addCell(totale);
-            table1.addCell(argentARetourner);
+
+            int totaleQty = 0;
+            double totalePrix = 0.0;
+            double tTotale = 0.0;
 
             for (Inventaire inv: list) {
                 Produit produit = GestionImpl.getGestion().getProduit(inv.getCode_produit());
@@ -77,8 +79,32 @@ public class Utils {
                 table1.addCell(String.valueOf(
                         inv.getQuantite() * produit.getPrix()
                 ));
-                table1.addCell("0.0");
+
+                totaleQty += inv.getQuantite();
+                totalePrix += produit.getPrix();
+                tTotale += produit.getPrix() * inv.getQuantite();
             }
+
+            table1.addCell("");
+            table1.addCell("");
+            table1.addCell(totale);
+            table1.addCell(String.valueOf(totaleQty));
+            table1.addCell(String.valueOf(totalePrix));
+            table1.addCell(String.valueOf(tTotale));
+
+            table1.addCell("");
+            table1.addCell("");
+            table1.addCell(argentP);
+            table1.addCell(String.valueOf(argent));
+            table1.addCell("");
+            table1.addCell("");
+
+            table1.addCell("");
+            table1.addCell("");
+            table1.addCell(argentARetourner);
+            table1.addCell(String.valueOf(money));
+            table1.addCell("");
+            table1.addCell("");
 
             document.add(table1);
 

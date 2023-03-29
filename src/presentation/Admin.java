@@ -160,12 +160,10 @@ public class Admin extends JFrame {
         );
 
         // updating the date using a Timer
-        javax.swing.Timer timer = new javax.swing.Timer(0, e -> {
+        new javax.swing.Timer(0, e -> {
             date.setTime(System.currentTimeMillis());
             time.setText(dateFormat.format(date));
-        });
-
-        timer.start();
+        }).start();
 
         // adding components to the JFrame:
         this.add(time);

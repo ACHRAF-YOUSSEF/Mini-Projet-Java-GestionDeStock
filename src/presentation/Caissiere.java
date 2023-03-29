@@ -54,7 +54,6 @@ public class Caissiere extends JFrame {
     private final JButton annulerCommande = new JButton("Annuler La Commande");
     private final JButton annuler = new JButton("Effacer");
     private final JButton print = new JButton("Imprimer");
-    private final JButton submit = new JButton("Soumettre");
     // IGestion
     private final IGestion gestion = GestionImpl.getGestion();
     // TableModeleCaissiereTable1
@@ -99,7 +98,6 @@ public class Caissiere extends JFrame {
         annulerCommande.setFocusable(false);
         annuler.setFocusable(false);
         print.setFocusable(false);
-        submit.setFocusable(false);
 
         //  making the borders and the background transparent for the paramtres JButton:
         paramtres.setBorder(BorderFactory.createLineBorder(new Color(0,0, 0, Transparency.TRANSLUCENT)));
@@ -163,6 +161,30 @@ public class Caissiere extends JFrame {
         rechercherTextField.setBackground(new Color(80, 80, 80));
         argentTotaleJTextField.setBackground(new Color(80, 80, 80));
 
+        // updating the argentARetournerJLabel2 JLabel
+        new javax.swing.Timer(0, e -> {
+            if (!argentTotaleJTextField.getText().equals("")) {
+                try {
+                    double prixTotale = Double.parseDouble(prixTotaleJLabel2.getText());
+                    double money = Double.parseDouble(argentTotaleJTextField.getText());
+
+                    if (money >= prixTotale) {
+                        argentARetournerJLabel2.setText(String.valueOf(money - prixTotale));
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                Caissiere.this,
+                                "erreur de saisie"
+                        );
+                    }
+
+                } catch (NumberFormatException e1) {
+                    e1.printStackTrace();
+                }
+            } else {
+                argentARetournerJLabel2.setText("0.0");
+            }
+        }).start();
+
         // adding the ActionListener to the JButtons:
         paramtres.addActionListener(e -> {
             new Parametrage_0(false);
@@ -174,25 +196,11 @@ public class Caissiere extends JFrame {
             me1.chargerTable(list);
         });
         print.addActionListener(e -> {
-            gestion.imprimer("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\pdfs\\pdf_1.pdf", gestion.getAllInventaire_());
-        });
-        submit.addActionListener(e ->  {
-            try {
-                double prixTotale = Double.parseDouble(prixTotaleJLabel2.getText());
-                double money = Double.parseDouble(argentTotaleJTextField.getText());
-
-                if (money >= prixTotale) {
-                    argentARetournerJLabel2.setText(String.valueOf(money - prixTotale));
-                } else {
-                    JOptionPane.showMessageDialog(
-                            Caissiere.this,
-                            "erreur de saisie"
-                    );
-                }
-
-            } catch (NumberFormatException e1) {
-                e1.printStackTrace();
-            }
+            gestion.imprimer("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\pdfs\\pdf_1.pdf",
+                    gestion.getAllInventaire_(),
+                    Double.parseDouble(argentTotaleJTextField.getText()),
+                    Double.parseDouble(argentARetournerJLabel2.getText())
+            );
         });
         insertCommande.addActionListener(e -> {
             if (
@@ -306,6 +314,10 @@ public class Caissiere extends JFrame {
                 gestion.stocker(inventaire);
                 me2.chargerTable(gestion.popInventaire());
                 me1.chargerTable(gestion.getAllInventaire());
+
+                if (gestion.getAllInventaire_().isEmpty()) {
+                    prixTotaleJLabel2.setText("0.0");
+                }
             }
         });
         annuler.addActionListener(e -> me2.chargerTable(new ArrayList<>()));
@@ -425,12 +437,6 @@ public class Caissiere extends JFrame {
                 prixTotaleJPanel.getWidth(),
                 140
         );
-        submit.setBounds(
-                argentARetournerJPanel.getX(),
-                argentARetournerJPanel.getY() - 50,
-                100,
-                40
-        );
         print.setBounds(
                 argentARetournerJPanel.getX() + argentARetournerJPanel.getWidth() + 10,
                 argentARetournerJPanel.getY() - 30,
@@ -549,7 +555,6 @@ public class Caissiere extends JFrame {
         this.add(argentTotaleJLabel);
         this.add(argentTotaleJTextField);
         this.add(print);
-        this.add(submit);
 
         // setup JFrame:
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
