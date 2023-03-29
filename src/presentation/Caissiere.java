@@ -3,6 +3,7 @@ package presentation;
 import dao.GestionImpl;
 import dao.IGestion;
 import metier.entity.Inventaire;
+import metier.entity.Pdf;
 import metier.entity.Produit;
 import presentation.tableModeles.TableModeleCaissiereTable1;
 import presentation.tableModeles.TableModeleCaissiereTable2;
@@ -171,10 +172,7 @@ public class Caissiere extends JFrame {
                     if (money >= prixTotale) {
                         argentARetournerJLabel2.setText(String.valueOf(money - prixTotale));
                     } else {
-                        JOptionPane.showMessageDialog(
-                                Caissiere.this,
-                                "erreur de saisie"
-                        );
+                        argentARetournerJLabel2.setText("0.0");
                     }
 
                 } catch (NumberFormatException e1) {
@@ -196,11 +194,29 @@ public class Caissiere extends JFrame {
             me1.chargerTable(list);
         });
         print.addActionListener(e -> {
-            gestion.imprimer("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\pdfs\\pdf_1.pdf",
-                    gestion.getAllInventaire_(),
-                    Double.parseDouble(argentTotaleJTextField.getText()),
-                    Double.parseDouble(argentARetournerJLabel2.getText())
-            );
+            try {
+                Pdf pdf = new Pdf();
+
+                gestion.imprimer("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\pdfs\\" + pdf.getNom(),
+                        gestion.getAllInventaire_(),
+                        Double.parseDouble(argentTotaleJTextField.getText()),
+                        Double.parseDouble(argentARetournerJLabel2.getText())
+                );
+
+                JOptionPane.showMessageDialog(
+                        Caissiere.this,
+                        "le pdf a été cré!",
+                        "information",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(
+                        Caissiere.this,
+                        "erreur lors de la création du pdf!:\n" + ex.getMessage(),
+                        "erreur",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
         });
         insertCommande.addActionListener(e -> {
             if (

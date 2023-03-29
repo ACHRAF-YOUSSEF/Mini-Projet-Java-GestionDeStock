@@ -454,7 +454,7 @@ public class GestionImpl implements IGestion {
     }
 
     @Override
-    public void imprimer(String FILE_NAME, List<Inventaire> list, double argent, double money) {
+    public void imprimer(String FILE_NAME, List<Inventaire> list, double argent, double money) throws Exception {
         Utils.generatePDF(FILE_NAME, list, argent, money);
     }
 }
