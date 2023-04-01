@@ -113,19 +113,14 @@ public class AjoutProduit extends JFrame {
                 try {
                     double price = Double.parseDouble(prixTextField.getText());
 
-                    Produit produit = new Produit(
+                    Produit produit_1 = new Produit(
                             nomProduitTextField.getText(),
                             categorieTextField.getText(),
                             price
                     );
+                    Produit produit = gestion.getAllProduit().stream().filter(produit_1::equals).findFirst().orElse(produit_1);
 
-                    if (
-                            gestion.getAllProduit()
-                                    .stream()
-                                    .filter(produit::equals)
-                                    .toList()
-                                    .size() == 0
-                    ) {
+                    if (produit.equals(produit_1)) {
                         gestion.ajouterProduit(produit);
 
                         JOptionPane.showMessageDialog(

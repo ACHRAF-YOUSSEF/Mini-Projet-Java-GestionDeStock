@@ -25,21 +25,4 @@ public class Inventaire {
         this.remarques = remarques;
         this.date = date;
     }
-
-    public String toString() {
-        Produit produit = gestion.getProduit(this.getCode_produit());
-
-        return "code_produit= "
-                + this.getCode_produit()
-                + ", nom= "
-                + produit.getNom()
-                + ", categorie= "
-                + produit.getCategorie()
-                + ", quantite= "
-                + this.getQuantite()
-                + ", prix= "
-                + produit.getPrix()
-                + ", totale= "
-                + produit.getPrix() * this.getQuantite();
-    }
 }
