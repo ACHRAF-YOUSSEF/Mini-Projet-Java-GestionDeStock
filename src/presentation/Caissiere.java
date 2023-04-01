@@ -193,7 +193,7 @@ public class Caissiere extends JFrame {
             }
         }).start();
 
-        // updating the nomProduitJTextField, categorieJTextField, prixJTextField, stockDisponibleJTextField JTextFields
+        // updating the nomProduitJTextField, categorieJTextField, prixJTextField, stockDisponibleJTextField JTextFields when codeProduitTextField is not empty
         new javax.swing.Timer(0, e -> {
             if (!codeProduitJTextField.getText().equals("")) {
                 try {

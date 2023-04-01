@@ -4,6 +4,7 @@ import com.toedter.calendar.JDateChooser;
 import dao.GestionImpl;
 import dao.IGestion;
 import metier.entity.Inventaire;
+import metier.entity.Produit;
 import presentation.tableModeles.TableModeleInventaire;
 
 import javax.swing.*;
@@ -85,6 +86,32 @@ public class Stocker extends JFrame {
 
         // getting the list of Inventaire and updating the TableModeleInventaire's data:
         me.chargerTable(gestion.getAllInventaire());
+
+        //
+        new javax.swing.Timer(0, e -> {
+            if (!codeProduitTextField.getText().equals("")) {
+                try {
+                    int code = Integer.parseInt(codeProduitTextField.getText());
+                    Inventaire inventaire = gestion.getInventaire(code);
+
+                    if (inventaire != null) {
+                        calendar.setDate(inventaire.getDate());
+                        transactionIDTextField.setText(String.valueOf(inventaire.getInventaireID()));
+                        quantityTextField.setText(String.valueOf(inventaire.getQuantite()));
+                    } else {
+                        calendar.setDate(new Date(System.currentTimeMillis()));
+                        transactionIDTextField.setText("");
+                        quantityTextField.setText("");
+                    }
+                } catch (NumberFormatException e1) {
+                    e1.printStackTrace();
+                }
+            } else {
+                calendar.setDate(new Date(System.currentTimeMillis()));
+                transactionIDTextField.setText("");
+                quantityTextField.setText("");
+            }
+        }).start();
 
         // adding the ActionListener to the JButtons:
         retour.addActionListener(e -> {
@@ -292,5 +319,9 @@ public class Stocker extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Stocker();
     }
 }
