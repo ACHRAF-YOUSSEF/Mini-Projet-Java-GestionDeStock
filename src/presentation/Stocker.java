@@ -95,11 +95,19 @@ public class Stocker extends JFrame {
                     Inventaire inventaire = gestion.getInventaire(code);
 
                     if (inventaire != null) {
-                        calendar.setDate(inventaire.getDate());
-                        transactionIDTextField.setText(String.valueOf(inventaire.getInventaireID()));
-                        quantityTextField.setText(String.valueOf(inventaire.getQuantite()));
+                        if (transactionIDTextField.getText().equals("")) {
+                            transactionIDTextField.setText(String.valueOf(inventaire.getInventaireID()));
+                        }
+
+                        if (quantityTextField.getText().equals("")) {
+                            quantityTextField.setText(String.valueOf(inventaire.getQuantite()));
+                        }
+
+                        if (calendar.getDate() == null) {
+                            calendar.setDate(inventaire.getDate());
+                        }
                     } else {
-                        calendar.setDate(new Date(System.currentTimeMillis()));
+                        calendar.setDate(null);
                         transactionIDTextField.setText("");
                         quantityTextField.setText("");
                     }
@@ -107,7 +115,7 @@ public class Stocker extends JFrame {
                     e1.printStackTrace();
                 }
             } else {
-                calendar.setDate(new Date(System.currentTimeMillis()));
+                calendar.setDate(null);
                 transactionIDTextField.setText("");
                 quantityTextField.setText("");
             }
