@@ -11,5 +11,7 @@
     <orderEntry type="library" name="lombok" level="project" />
     <orderEntry type="library" name="jcalendar-1.4" level="project" />
     <orderEntry type="library" name="itextpdf-5.1.0" level="project" />
+    <orderEntry type="library" name="github.pcorless.icepdf.core" level="project" />
+    <orderEntry type="library" name="github.pcorless.icepdf.viewer" level="project" />
   </component>
 </module>

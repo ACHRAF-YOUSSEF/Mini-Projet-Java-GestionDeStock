@@ -238,7 +238,8 @@ public class Caissiere extends JFrame {
             try {
                 Pdf pdf = new Pdf();
 
-                gestion.imprimer("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\pdfs\\" + pdf.getNom(),
+                gestion.imprimer(
+                        "D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\pdfs\\" + pdf.getNom(),
                         gestion.getAllInventaire_(),
                         Double.parseDouble(argentTotaleJTextField.getText()),
                         Double.parseDouble(argentARetournerJLabel2.getText())
@@ -250,6 +251,16 @@ public class Caissiere extends JFrame {
                         "information",
                         JOptionPane.INFORMATION_MESSAGE
                 );
+
+                // affichage du pdf
+                JDialog dialog = new JDialog();
+
+                dialog.add(new PDFJPanel("D:\\semestre 2\\java avancée\\ex_cours\\chapitre4\\GestionDeStock\\src\\pdfs\\" + pdf.getNom()));
+
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                dialog.setLocationRelativeTo(null);
+                dialog.setSize(600, 600);
+                dialog.setVisible(true);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(
                         Caissiere.this,

@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="github.pcorless.icepdf.core" type="repository">
+    <properties maven-id="com.github.pcorless.icepdf:icepdf-core:7.0.2" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/pcorless/icepdf/icepdf-core/7.0.2/icepdf-core-7.0.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/bouncycastle/bcprov-ext-jdk15on/1.70/bcprov-ext-jdk15on-1.70.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/bouncycastle/bcpkix-jdk15on/1.70/bcpkix-jdk15on-1.70.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/bouncycastle/bcprov-jdk15on/1.70/bcprov-jdk15on-1.70.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/bouncycastle/bcutil-jdk15on/1.70/bcutil-jdk15on-1.70.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/twelvemonkeys/imageio/imageio-tiff/3.9.4/imageio-tiff-3.9.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/twelvemonkeys/imageio/imageio-core/3.9.4/imageio-core-3.9.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/twelvemonkeys/imageio/imageio-metadata/3.9.4/imageio-metadata-3.9.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/twelvemonkeys/common/common-lang/3.9.4/common-lang-3.9.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/twelvemonkeys/common/common-io/3.9.4/common-io-3.9.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/twelvemonkeys/common/common-image/3.9.4/common-image-3.9.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/pdfbox/fontbox/2.0.27/fontbox-2.0.27.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/pdfbox/jbig2-imageio/3.0.4/jbig2-imageio-3.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
