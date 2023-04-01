@@ -184,7 +184,6 @@ public class Caissiere extends JFrame {
                     } else {
                         argentARetournerJLabel2.setText("0.0");
                     }
-
                 } catch (NumberFormatException e1) {
                     e1.printStackTrace();
                 }

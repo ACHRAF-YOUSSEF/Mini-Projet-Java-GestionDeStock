@@ -103,7 +103,6 @@ public class AjoutProduit extends JFrame {
                         if (nomProduitTextField.getText().equals("")) {
                             nomProduitTextField.setText(produit.getNom());
                         }
-
                         if (categorieTextField.getText().equals("")) {
                             categorieTextField.setText(produit.getCategorie());
                         }

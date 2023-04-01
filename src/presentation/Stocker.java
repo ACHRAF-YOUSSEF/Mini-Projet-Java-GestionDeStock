@@ -87,7 +87,14 @@ public class Stocker extends JFrame {
         // getting the list of Inventaire and updating the TableModeleInventaire's data:
         me.chargerTable(gestion.getAllInventaire());
 
-        //
+        // adding tool tips
+        codeProduitTextField.setToolTipText("saisie la quantité du produit");
+        calendar.setToolTipText("saisie la date d'expiration");
+        transactionIDTextField.setToolTipText("saisie l'identifiant du transaction");
+        quantityTextField.setToolTipText("saisie la quantité du produit");
+        rechercherTextField.setToolTipText("faire une recherche");
+
+        // updating transactionIDTextField, quantityTextField JTextFields and calendar JDateChooser when codeProduitTextField is not empty
         new javax.swing.Timer(0, e -> {
             if (!codeProduitTextField.getText().equals("")) {
                 try {
@@ -327,9 +334,5 @@ public class Stocker extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new Stocker();
     }
 }

@@ -134,8 +134,10 @@ public class GererUtilisateur extends JFrame {
                     Utilisateur utilisateur = gestion.getUtilisateur(id);
 
                     if (utilisateur != null) {
-                        nomTextField.setText(utilisateur.getNom());
-                        comboBox.setSelectedIndex((utilisateur.getAdmin() == 1)? 0 : 1);
+                        if (nomTextField.getText().equals("")) {
+                            nomTextField.setText(utilisateur.getNom());
+                            comboBox.setSelectedIndex((utilisateur.getAdmin() == 1)? 0 : 1);
+                        }
                     } else {
                         comboBox.setSelectedIndex(0);
                         nomTextField.setText("");

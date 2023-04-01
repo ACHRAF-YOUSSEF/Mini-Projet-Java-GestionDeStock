@@ -3,6 +3,7 @@ package presentation;
 import dao.GestionImpl;
 import dao.IGestion;
 import metier.entity.Inventaire;
+import metier.entity.Produit;
 import presentation.tableModeles.TableModeleInventaire;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ public class Destocker extends JFrame {
     private final JLabel titre = new JLabel("Destocker");
     private final JLabel codeProduit = new JLabel("Code Produit");
     private final JLabel stockDisponible = new JLabel("Stock Disponible");
-    private final JLabel remarques = new JLabel("Remarques");
+    private final JLabel remarques = new JLabel("Remarque");
     private final JLabel quantity = new JLabel("Quatité");
     // JTextFields
     private final JTextField rechercherTextField = new JTextField();
@@ -87,6 +88,36 @@ public class Destocker extends JFrame {
 
         // getting the list of Inventaire and updating the TableModeleInventaire's data:
         me.chargerTable(gestion.getAllInventaire());
+
+        // adding tool tips
+        codeProduitTextField.setToolTipText("saisie la quantité du produit");
+        remarquesComboBox.setToolTipText("saisie la remarque");
+        quantityTextField.setToolTipText("saisie la quantité du produit");
+        stockDisponibleTextField.setToolTipText("saisie le stock disponible du produit");
+        rechercherTextField.setToolTipText("faire une recherche");
+
+        // updating stockDisponibleTextField, remarquesComboBox, stockDisponibleTextField when codeProduitTextField is not empty
+        new Timer(0 , e -> {
+            if (!codeProduitTextField.getText().equals("")){
+                try {
+                    int code = Integer.parseInt(codeProduitTextField.getText());
+                    Produit produit = gestion.getProduit(code);
+                    Inventaire inventaire = gestion.getInventaire(code);
+
+                    if (produit != null) {
+                        stockDisponibleTextField.setText(String.valueOf(inventaire.getQuantite()));
+                    } else {
+                        remarquesComboBox.setSelectedIndex(0);
+                        stockDisponibleTextField.setText("");
+                    }
+                } catch (NumberFormatException e1) {
+                    e1.printStackTrace();
+                }
+            } else {
+                remarquesComboBox.setSelectedIndex(0);
+                stockDisponibleTextField.setText("");
+            }
+        }).start();
 
         // adding the ActionListener to the JButtons:
         retour.addActionListener(e -> {
@@ -160,6 +191,7 @@ public class Destocker extends JFrame {
         remarques.setFont(new Font(null, Font.PLAIN, 20));
         quantity.setFont(new Font(null, Font.PLAIN, 20));
         stockDisponibleTextField.setFont(new Font(null, Font.PLAIN, 15));
+        codeProduitTextField.setFont(new Font(null, Font.PLAIN, 15));
         remarquesComboBox.setFont(new Font(null, Font.PLAIN, 15));
         quantityTextField.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -293,9 +325,5 @@ public class Destocker extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new Destocker();
     }
 }
