@@ -92,6 +92,33 @@ public class AjoutProduit extends JFrame {
         // adding tool tips
         rechercherTextField.setToolTipText("faire une recherche");
 
+        //
+        new javax.swing.Timer(0, e -> {
+            if (!codeProduitTextField.getText().equals("")) {
+                try {
+                    int code = Integer.parseInt(codeProduitTextField.getText());
+                    Produit produit = gestion.getProduit(code);
+
+                    if (produit != null) {
+                        nomProduitTextField.setText(produit.getNom());
+                        categorieTextField.setText(produit.getCategorie());
+                        prixTextField.setText(String.valueOf(produit.getPrix()));
+                    } else {
+                        nomProduitTextField.setText("");
+                        categorieTextField.setText("");
+                        prixTextField.setText("");
+                    }
+
+                } catch (NumberFormatException e1) {
+                    e1.printStackTrace();
+                }
+            } else {
+                nomProduitTextField.setText("");
+                categorieTextField.setText("");
+                prixTextField.setText("");
+            }
+        }).start();
+
         // adding the ActionListener to the JButtons:
         retour.addActionListener(e -> {
             new Admin();
@@ -401,5 +428,9 @@ public class AjoutProduit extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new AjoutProduit();
     }
 }

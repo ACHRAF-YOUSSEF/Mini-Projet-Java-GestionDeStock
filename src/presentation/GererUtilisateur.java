@@ -2,6 +2,8 @@ package presentation;
 
 import dao.GestionImpl;
 import dao.IGestion;
+import metier.entity.Inventaire;
+import metier.entity.Produit;
 import metier.entity.Utilisateur;
 import presentation.tableModeles.TableModeleUtilisateur;
 
@@ -123,6 +125,33 @@ public class GererUtilisateur extends JFrame {
 
         // getting the list of Utilisateur and updating the TableModeleUtilisateur's data:
         me.chargerTable(gestion.getAllUtilisateur());
+
+        // updating the nomTextField, prixJTextField, passwordField and confirmPasswordField JTextFields and comboBox JComboBox
+        new javax.swing.Timer(0, e -> {
+            if (!idTextField.getText().equals("")) {
+                try {
+                    int id = Integer.parseInt(idTextField.getText());
+                    Utilisateur utilisateur = gestion.getUtilisateur(id);
+
+                    if (utilisateur != null) {
+                        nomTextField.setText(utilisateur.getNom());
+                        comboBox.setSelectedIndex((utilisateur.getAdmin() == 1)? 0 : 1);
+                    } else {
+                        comboBox.setSelectedIndex(0);
+                        nomTextField.setText("");
+                        passwordField.setText("");
+                        confirmPasswordField.setText("");
+                    }
+                } catch (NumberFormatException e1) {
+                    e1.printStackTrace();
+                }
+            } else {
+                comboBox.setSelectedIndex(0);
+                nomTextField.setText("");
+                passwordField.setText("");
+                confirmPasswordField.setText("");
+            }
+        }).start();
 
         // adding the ActionListener to the JButtons:
         retour.addActionListener(e -> {
