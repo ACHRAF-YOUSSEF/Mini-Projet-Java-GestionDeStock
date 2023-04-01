@@ -44,7 +44,7 @@ public class Caissiere extends JFrame {
     private final JTextField codeProduitJTextField = new JTextField();
     private final JTextField stockDisponibleJTextField = new JTextField();
     private final JTextField nomProduitJTextField = new JTextField();
-    private final JTextField categorieJTextFieldl = new JTextField();
+    private final JTextField categorieJTextField = new JTextField();
     private final JTextField prixJTextField = new JTextField();
     private final JTextField quantiteJTextField = new JTextField();
     private final JTextField argentTotaleJTextField = new JTextField();
@@ -137,7 +137,7 @@ public class Caissiere extends JFrame {
         codeProduitJTextField.setFont(new Font(null, Font.PLAIN, 15));
         stockDisponibleJTextField.setFont(new Font(null, Font.PLAIN, 15));
         nomProduitJTextField.setFont(new Font(null, Font.PLAIN, 15));
-        categorieJTextFieldl.setFont(new Font(null, Font.PLAIN, 15));
+        categorieJTextField.setFont(new Font(null, Font.PLAIN, 15));
         prixJTextField.setFont(new Font(null, Font.PLAIN, 15));
         quantiteJTextField.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -162,6 +162,16 @@ public class Caissiere extends JFrame {
         rechercherTextField.setBackground(new Color(80, 80, 80));
         argentTotaleJTextField.setBackground(new Color(80, 80, 80));
 
+        // adding tool tips
+        rechercherTextField.setToolTipText("faire une recherche");
+        quantiteJTextField.setToolTipText("saisie la quantité du produit");
+        argentTotaleJTextField.setToolTipText("saisie le montant");
+        codeProduitJTextField.setToolTipText("saisie le code produit du produit");
+        nomProduitJTextField.setToolTipText("saisie le nom du produit");
+        categorieJTextField.setToolTipText("saisie la categorie du produit");
+        prixJTextField.setToolTipText("saisie le prix du produit");
+        stockDisponibleJTextField.setToolTipText("saisie le stock disponible du produit");
+
         // updating the argentARetournerJLabel2 JLabel
         new javax.swing.Timer(0, e -> {
             if (!argentTotaleJTextField.getText().equals("")) {
@@ -180,6 +190,37 @@ public class Caissiere extends JFrame {
                 }
             } else {
                 argentARetournerJLabel2.setText("0.0");
+            }
+        }).start();
+
+        // updating the nomProduitJTextField, categorieJTextField, prixJTextField, stockDisponibleJTextField JTextFields
+        new javax.swing.Timer(0, e -> {
+            if (!codeProduitJTextField.getText().equals("")) {
+                try {
+                    int code = Integer.parseInt(codeProduitJTextField.getText());
+
+                    Produit produit = gestion.getProduit(code);
+                    Inventaire inventaire = gestion.getInventaire(code);
+
+                    if (produit != null && inventaire != null) {
+                        nomProduitJTextField.setText(produit.getNom());
+                        categorieJTextField.setText(produit.getCategorie());
+                        prixJTextField.setText(String.valueOf(produit.getPrix()));
+                        stockDisponibleJTextField.setText(String.valueOf(inventaire.getQuantite()));
+                    } else {
+                        nomProduitJTextField.setText("");
+                        categorieJTextField.setText("");
+                        prixJTextField.setText("");
+                        stockDisponibleJTextField.setText("");
+                    }
+                } catch (NumberFormatException e1) {
+                    e1.printStackTrace();
+                }
+            } else {
+                nomProduitJTextField.setText("");
+                categorieJTextField.setText("");
+                prixJTextField.setText("");
+                stockDisponibleJTextField.setText("");
             }
         }).start();
 
@@ -405,7 +446,7 @@ public class Caissiere extends JFrame {
                 160,
                 40
         );
-        categorieJTextFieldl.setBounds(
+        categorieJTextField.setBounds(
                 categorieJLabel.getX() + categorieJLabel.getWidth() - 20,
                 categorieJLabel.getY(),
                 200,
@@ -515,7 +556,7 @@ public class Caissiere extends JFrame {
         nomProduitJTextField.setBorder(
                 BorderFactory.createMatteBorder(0, 0, 1, 0 , Color.BLACK)
         );
-        categorieJTextFieldl.setBorder(
+        categorieJTextField.setBorder(
                 BorderFactory.createMatteBorder(0, 0, 1, 0 , Color.BLACK)
         );
         prixJTextField.setBorder(
@@ -560,7 +601,7 @@ public class Caissiere extends JFrame {
         this.add(codeProduitJTextField);
         this.add(stockDisponibleJTextField);
         this.add(nomProduitJTextField);
-        this.add(categorieJTextFieldl);
+        this.add(categorieJTextField);
         this.add(prixJTextField);
         this.add(quantiteJTextField);
         this.add(insertCommande);

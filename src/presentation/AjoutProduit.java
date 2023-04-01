@@ -89,6 +89,9 @@ public class AjoutProduit extends JFrame {
         // getting the list of Produit and updating the TableModeleProduit's data:
         me.chargerTable(gestion.getAllProduit());
 
+        // adding tool tips
+        rechercherTextField.setToolTipText("faire une recherche");
+
         // adding the ActionListener to the JButtons:
         retour.addActionListener(e -> {
             new Admin();
