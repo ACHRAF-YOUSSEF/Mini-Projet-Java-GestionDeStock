@@ -101,7 +101,47 @@ public class Parametrage_0 extends JFrame {
             dev.setBackground(Color.GRAY);
         });
         dev.addActionListener(e -> {
-            text = "";
+            text = """
+                    Titre : Guide de développement de "Gestion De Stock" d'Achraf Youssef
+                                        
+                    Introduction :
+                    "Gestion De Stock" est une application Java de bureau développée par Achraf Youssef.
+                    Cette application est conçue pour aider les utilisateurs à gérer leur stock et leur inventaire facilement.
+                    Dans ce guide, nous vous guiderons à travers les étapes pour commencer avec "Gestion De Stock", y compris le téléchargement et la configuration de l'application, ainsi que quelques instructions d'utilisation de base.
+                                        
+                    Téléchargement de "Gestion De Stock" :
+                                        
+                    Le code source de "Gestion De Stock" peut être trouvé sur le profil GitHub d'Achraf Youssef à l'adresse https://github.com/ACHRAF-YOUSSEF/Mini-Projet-Java-GestionDeStock.
+                    Vous pouvez télécharger le code source en cliquant sur le bouton vert "Code" et en sélectionnant "Download ZIP".
+                    Extrayez le fichier ZIP téléchargé dans un répertoire de votre choix.
+                     
+                    Configuration de "Gestion De Stock" :
+                                        
+                    Ouvrez le répertoire du projet dans votre environnement de développement Java préféré, tel que Eclipse ou IntelliJ IDEA.
+                    Si votre environnement de développement ne reconnaît pas le projet comme un projet Java, vous devrez peut-être créer un nouveau projet Java et importer le code source.
+                    Ajoutez les bibliothèques suivantes au chemin de classe de votre projet :
+                     
+                    - lombok
+                    - jcalendar-1.4
+                    - itextpdf-5.1.0
+                    - mysql-connector-java-5.1.47
+                    - icepdf-viewer-7.0.2
+                    - icepdf-core-7.0.2
+                     
+                    Une fois le projet configuré et les bibliothèques ajoutées au chemin de classe, exécutez la classe principale, "GestionDeStock.java".
+                    Utilisation de "Gestion De Stock" :
+                                        
+                    "Gestion De Stock" vous permet d'ajouter et de supprimer des articles de votre inventaire, ainsi que de visualiser et de mettre à jour les articles existants.
+                    Vous pouvez exporter les données de votre inventaire vers un fichier PDF pour des fins de sauvegarde.
+                    Cliquez simplement sur le bouton "Imprimer" pour l'imprimer.
+                     
+                    Conclusion :
+                     
+                    "Gestion De Stock" est un outil de gestion d'inventaire puissant et convivial développé par Achraf Youssef.
+                    Que vous soyez propriétaire d'une petite entreprise ou que vous cherchiez simplement un moyen de suivre votre inventaire personnel, "Gestion De Stock" est un excellent choix.
+                    Pour plus d'informations, veuillez vous référer au référentiel GitHub à l'adresse https://github.com/ACHRAF-YOUSSEF/Mini-Projet-Java-GestionDeStock.
+                    Pour voir les autres projets d'Achraf Youssef, visitez son profil GitHub à l'adresse https://github.com/ACHRAF-YOUSSEF
+                    """;
             textArea.setText(text);
             dev.setBackground(Color.GREEN);
             about.setBackground(Color.GRAY);
@@ -133,6 +173,14 @@ public class Parametrage_0 extends JFrame {
                         0,
                         0 ,
                         Color.BLACK
+                )
+        );
+        textArea.setBorder(
+                BorderFactory.createEmptyBorder(
+                        20,
+                        20,
+                        20,
+                        20
                 )
         );
         scrollPane.setBorder(
@@ -212,5 +260,9 @@ public class Parametrage_0 extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Parametrage_0(true);
     }
 }
