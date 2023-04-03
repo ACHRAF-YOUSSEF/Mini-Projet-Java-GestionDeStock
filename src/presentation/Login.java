@@ -88,7 +88,7 @@ public class Login extends JFrame {
                     if (utilisateur.getAdmin() == 1) {
                         new Admin();
                     } else {
-                        new Caissiere();
+                        new Caissiere(utilisateur.getNom());
                     }
 
                     dispose();

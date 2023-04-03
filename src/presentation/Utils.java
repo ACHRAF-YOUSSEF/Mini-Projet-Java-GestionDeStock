@@ -10,7 +10,6 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import dao.GestionImpl;
 import metier.entity.Inventaire;
 import metier.entity.Produit;
 
@@ -31,30 +30,45 @@ public class Utils {
         System.out.println("Writing Now!");
 
         Paragraph p = new Paragraph();
+
+        Font font_1 = new Font();
+
+        font_1.setSize(40);
+        font_1.setStyle(Font.BOLD);
+
+        p.setFont(font_1);
         p.add("Facture");
         p.setAlignment(Element.ALIGN_CENTER);
+
         document.add(p);
         document.add(Chunk.NEWLINE);
 
-        Font font = new Font();
-        font.setStyle(Font.BOLD);
-        font.setSize(8);
+        Font font_2 = new Font();
+
+        font_2.setStyle(Font.NORMAL);
+        font_2.setSize(15);
+
+        Font font_3 = new Font();
+
+        font_3.setStyle(Font.NORMAL);
+        font_3.setSize(10);
 
         PdfPTable table1 = new PdfPTable(new float[] {
                 1f, 1f, 1f, 1f, 1f, 1f
         });
 
+        table1.getDefaultCell().setBorder(0);
         table1.setWidthPercentage(100);
         table1.setHorizontalAlignment(Element.ALIGN_LEFT);
 
-        Phrase code_produit = new Phrase("Code Produit", font);
-        Phrase nom = new Phrase("Nom Produit", font);
-        Phrase categorie = new Phrase("Categorie", font);
-        Phrase quatite = new Phrase("Quatité", font);
-        Phrase prix = new Phrase("Prix", font);
-        Phrase totale = new Phrase("Totale", font);
-        Phrase argentP = new Phrase("Argent Totale", font);
-        Phrase argentARetourner = new Phrase("Argent A Retourner", font);
+        Phrase code_produit = new Phrase("Code Produit", font_2);
+        Phrase nom = new Phrase("Nom Produit", font_2);
+        Phrase categorie = new Phrase("Categorie", font_2);
+        Phrase quatite = new Phrase("Quatité", font_2);
+        Phrase prix = new Phrase("Prix", font_2);
+        Phrase totale = new Phrase("Totale", font_2);
+        Phrase argentP = new Phrase("Argent Totale", font_2);
+        Phrase argentARetourner = new Phrase("Argent A Retourner", font_2);
 
         table1.addCell(code_produit);
         table1.addCell(nom);
@@ -68,42 +82,74 @@ public class Utils {
         double tTotale = 0.0;
 
         for (Inventaire inv: list) {
-            Produit produit = GestionImpl.getGestion().getProduit(inv.getCode_produit());
+            Produit produit = inv.getProduit();
 
-            table1.addCell(String.valueOf(inv.getCode_produit()));
-            table1.addCell(produit.getNom());
-            table1.addCell(produit.getCategorie());
-            table1.addCell(String.valueOf(inv.getQuantite()));
-            table1.addCell(String.valueOf(produit.getPrix()));
-            table1.addCell(String.valueOf(
+            table1.addCell(new Phrase(String.valueOf(produit.getCode_produit()), font_3));
+            table1.addCell(new Phrase(produit.getNom(), font_3));
+            table1.addCell(new Phrase(produit.getCategorie(), font_3));
+            table1.addCell(new Phrase(String.valueOf(inv.getQuantite()), font_3));
+            table1.addCell(new Phrase(String.valueOf(produit.getPrix()), font_3));
+            table1.addCell(new Phrase(String.valueOf(
                     inv.getQuantite() * produit.getPrix()
-            ));
+            ), font_3));
 
             totaleQty += inv.getQuantite();
             totalePrix += produit.getPrix();
             tTotale += produit.getPrix() * inv.getQuantite();
         }
 
+        document.add(table1);
+
+        table1 = new PdfPTable(new float[] {
+                1f, 1f, 1f, 1f, 1f, 1f
+        });
+
+        table1.getDefaultCell().setBorder(0);
+        table1.setWidthPercentage(100);
+        table1.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+
         table1.addCell("");
         table1.addCell("");
         table1.addCell(totale);
-        table1.addCell(String.valueOf(totaleQty));
-        table1.addCell(String.valueOf(totalePrix));
-        table1.addCell(String.valueOf(tTotale));
+        table1.addCell(new Phrase(String.valueOf(totaleQty), font_3));
+        table1.addCell(new Phrase(String.valueOf(totalePrix), font_3));
+        table1.addCell(new Phrase(String.valueOf(tTotale), font_3));
 
-        table1.addCell("");
-        table1.addCell("");
+        document.add(table1);
+        document.add(Chunk.NEWLINE);
+
+        table1 = new PdfPTable(new float[] {
+                1f, 1f, 1f, 1f, 1f, 1f
+        });
+
+        table1.getDefaultCell().setBorder(0);
+        table1.setWidthPercentage(100);
+        table1.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+
         table1.addCell(argentP);
-        table1.addCell(String.valueOf(argent));
         table1.addCell("");
         table1.addCell("");
+        table1.addCell("");
+        table1.addCell("");
+        table1.addCell(new Phrase(String.valueOf(argent), font_3));
 
-        table1.addCell("");
-        table1.addCell("");
+        document.add(table1);
+        document.add(Chunk.NEWLINE);
+
+        table1 = new PdfPTable(new float[] {
+                1f, 1f, 1f, 1f, 1f, 1f
+        });
+
+        table1.getDefaultCell().setBorder(0);
+        table1.setWidthPercentage(100);
+        table1.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+
         table1.addCell(argentARetourner);
-        table1.addCell(String.valueOf(money));
         table1.addCell("");
         table1.addCell("");
+        table1.addCell("");
+        table1.addCell("");
+        table1.addCell(new Phrase(String.valueOf(money), font_3));
 
         document.add(table1);
 

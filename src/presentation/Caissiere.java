@@ -9,12 +9,18 @@ import presentation.tableModeles.TableModeleCaissiereTable1;
 import presentation.tableModeles.TableModeleCaissiereTable2;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Caissiere extends JFrame {
     // components
+    // DefaultTableCellRenderer
+    private final DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     // JPanel
     private final JPanel prixTotaleJPanel = new JPanel(new BorderLayout(10, 10));
     private final JPanel prixTotaleJPanel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -24,7 +30,7 @@ public class Caissiere extends JFrame {
     private final JPanel tableJPanel2 = new JPanel(new GridLayout(1, 1));
     // JLabels
     private final JLabel leftArrowJLabel = new JLabel(">>>>>");
-    private final JLabel titreJLabel = new JLabel("Caissiere");
+    private final JLabel titreJLabel = new JLabel("Welcome ");
     private final JLabel codeProduitJLabel = new JLabel("Code Produit:");
     private final JLabel stockDisponibleJLabel = new JLabel("Stock Disponible:");
     private final JLabel nomProduitJLabel = new JLabel("Nom Produit:");
@@ -67,9 +73,12 @@ public class Caissiere extends JFrame {
     private final JScrollPane jsp1 = new JScrollPane(table1);
     private final JScrollPane jsp2 = new JScrollPane(table2);
 
-    public Caissiere() {
+    public Caissiere(String name) {
         // titreJLabel:
         super("Caissiere");
+
+        // updating titreJLabel JLabel
+        titreJLabel.setText(titreJLabel.getText() + name + "!");
 
         // setting the Layout Manager for the JFrame
         this.setLayout(null);
@@ -112,13 +121,24 @@ public class Caissiere extends JFrame {
         paramtres.setVerticalTextPosition(SwingConstants.BOTTOM);
         paramtres.setHorizontalTextPosition(SwingConstants.CENTER);
 
+        // centering each table entry to center by changing the cell renderer of each one :
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        for (int i = 0; i < table1.getColumnCount(); i++) {
+            table1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+
+        for (int i = 0; i < table2.getColumnCount(); i++) {
+            table2.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+
         // getting the list of Inventaire and updating the TableModeleCaissiereTable1's and TableModeleCaissiereTable2's data:
         me1.chargerTable(gestion.getAllInventaire());
         me2.chargerTable(gestion.getAllInventaire_());
 
         // setting the fonts + colors:
         //fonts
-        titreJLabel.setFont(new Font(null, Font.PLAIN, 50));
+        titreJLabel.setFont(new Font(null, Font.ITALIC, 40));
         argentTotaleJLabel.setFont(new Font(null, Font.PLAIN, 20));
         prixTotaleJLabel1.setFont(new Font(null, Font.PLAIN, 20));
         prixTotaleJLabel2.setFont(new Font(null, Font.PLAIN, 20));
@@ -155,12 +175,24 @@ public class Caissiere extends JFrame {
         categorieJLabel.setForeground(Color.WHITE);
         prixJLabel.setForeground(Color.WHITE);
         quantiteJLabel.setForeground(Color.WHITE);
+        insertCommande.setForeground(Color.WHITE);
+        annulerCommande.setForeground(Color.WHITE);
+        annuler.setForeground(Color.WHITE);
+        print.setForeground(Color.WHITE);
 
         // Background
         paramtres.setBackground(new Color(80, 80, 80));
         rechercher.setBackground(new Color(80, 80, 80));
         rechercherTextField.setBackground(new Color(80, 80, 80));
         argentTotaleJTextField.setBackground(new Color(80, 80, 80));
+        insertCommande.setBackground(new Color(20, 204, 204));
+        annulerCommande.setBackground(new Color(153, 54, 255));
+        annuler.setBackground(new Color(192, 192, 192));
+        print.setBackground(new Color(135,206,235));
+        prixTotaleJPanel.setBackground(new Color(128, 128, 128));
+        prixTotaleJPanel2.setBackground(new Color(128, 128, 128));
+        argentARetournerJPanel.setBackground(new Color(200,215,0));
+        argentARetournerJPanel2.setBackground(new Color(200,215,0));
 
         // adding tool tips
         rechercherTextField.setToolTipText("faire une recherche");
@@ -172,6 +204,30 @@ public class Caissiere extends JFrame {
         prixJTextField.setToolTipText("saisie le prix du produit");
         stockDisponibleJTextField.setToolTipText("saisie le stock disponible du produit");
 
+        // adding the mouseListener to the JTable:
+        table1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) {
+                    JTable target = (JTable) e.getSource();
+
+                    int row = target.getSelectedRow();
+
+                    int id = (int) target.getValueAt(row, 0);
+
+                    codeProduitJTextField.setText(String.valueOf(id));
+
+                    Inventaire inventaire = gestion.getInventaire(id);
+
+                    codeProduitJTextField.setText(String.valueOf(inventaire.getProduit().getCode_produit()));
+                    stockDisponibleJTextField.setText(String.valueOf(inventaire.getQuantite()));
+                    prixJTextField.setText(String.valueOf(inventaire.getProduit().getPrix()));
+                    nomProduitJTextField.setText(inventaire.getProduit().getNom());
+                    categorieJTextField.setText(inventaire.getProduit().getCategorie());
+                }
+            }
+        });
+
         // updating the argentARetournerJLabel2 JLabel
         new javax.swing.Timer(0, e -> {
             if (!argentTotaleJTextField.getText().equals("")) {
@@ -180,7 +236,7 @@ public class Caissiere extends JFrame {
                     double money = Double.parseDouble(argentTotaleJTextField.getText());
 
                     if (money >= prixTotale) {
-                        argentARetournerJLabel2.setText(String.valueOf(money - prixTotale));
+                        argentARetournerJLabel2.setText(String.valueOf(Math.round((money - prixTotale) * Math.pow(10, 3)) / Math.pow(10, 3)));
                     } else {
                         argentARetournerJLabel2.setText("0.0");
                     }
@@ -225,7 +281,7 @@ public class Caissiere extends JFrame {
 
         // adding the ActionListener to the JButtons:
         paramtres.addActionListener(e -> {
-            new Parametrage_0(false);
+            new Parametrage(false, name);
             dispose();
         });
         rechercher.addActionListener(e -> {
@@ -302,11 +358,11 @@ public class Caissiere extends JFrame {
                                 if (qty > 0 && qty <= stock) {
                                     if (prix == produit.getPrix()) {
                                         Inventaire inventaire2 = new Inventaire(
-                                                code,
                                                 0,
                                                 inventaire.getIdTransaction(),
                                                 inventaire.getRemarques(),
-                                                inventaire.getDate()
+                                                inventaire.getDate(),
+                                                inventaire.getProduit()
                                         );
                                         inventaire2.setInventaireID(inventaire.getInventaireID());
                                         inventaire2.setQuantite(inventaire.getQuantite() - qty);
@@ -364,9 +420,9 @@ public class Caissiere extends JFrame {
         annulerCommande.addActionListener(e -> {
             if (!gestion.getAllInventaire_().isEmpty()) {
                 Inventaire inventaire = gestion.getAllInventaire_().get(0);
-                int qty_ = gestion.getInventaire(inventaire.getCode_produit()).getQuantite();
+                int qty_ = gestion.getInventaire(inventaire.getProduit().getCode_produit()).getQuantite();
                 int qty = inventaire.getQuantite();
-                double prix = gestion.getProduit(inventaire.getCode_produit()).getPrix();
+                double prix = gestion.getProduit(inventaire.getProduit().getCode_produit()).getPrix();
 
                 inventaire.setQuantite(qty_ + qty);
 
@@ -553,7 +609,23 @@ public class Caissiere extends JFrame {
                 40
         );
 
-        // adding border to the JTextFields:
+        // adding border to the JTextFields and JPanels:
+        prixTotaleJPanel.setBorder(
+                BorderFactory.createEmptyBorder(
+                        5,
+                        20,
+                        0,
+                        0
+                )
+        );
+        argentARetournerJPanel.setBorder(
+                BorderFactory.createEmptyBorder(
+                        5,
+                        20,
+                        0,
+                        0
+                )
+        );
         rechercherTextField.setBorder(
                 BorderFactory.createMatteBorder(0, 0, 1, 0 , Color.BLACK)
         );
@@ -627,5 +699,9 @@ public class Caissiere extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Caissiere("Caisse 1");
     }
 }

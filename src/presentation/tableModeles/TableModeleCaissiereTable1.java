@@ -31,13 +31,13 @@ public class TableModeleCaissiereTable1 extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        final int code_produit = inventaires.get(rowIndex).getCode_produit();
+        final Produit produit = inventaires.get(rowIndex).getProduit();
 
         return switch (columnIndex) {
-            case 0 -> code_produit;
-            case 1 -> gestion.getProduit(code_produit).getNom();
-            case 2 -> gestion.getProduit(code_produit).getCategorie();
-            case 3 -> gestion.getProduit(code_produit).getPrix();
+            case 0 -> produit.getCode_produit();
+            case 1 -> produit.getNom();
+            case 2 -> produit.getCategorie();
+            case 3 -> produit.getPrix();
             case 4 -> inventaires.get(rowIndex).getQuantite();
             default -> null;
         };

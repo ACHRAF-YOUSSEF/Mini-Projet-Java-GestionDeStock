@@ -83,9 +83,13 @@ public class GererInventaire extends JFrame {
         // colors (Foreground + Background):
         // Foreground:
         titre.setForeground(Color.BLACK);
+        stockIn.setForeground(Color.WHITE);
+        stockOut.setForeground(Color.WHITE);
 
         // Background:
         retour.setBackground(Color.WHITE);
+        stockIn.setBackground(new Color(102,204, 0));
+        stockOut.setBackground(new Color(20, 204, 204));
 
         // setting the bounds of the retour JButton:
         retour.setBounds(40,

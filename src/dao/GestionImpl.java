@@ -293,14 +293,14 @@ public class GestionImpl implements IGestion {
     @Override
     public void stocker(Inventaire i) {
         Connection cx = SingletonConnection.getInstance();
-        Inventaire inventaire = getInventaire(i.getCode_produit());
+        Inventaire inventaire = getInventaire(i.getProduit().getCode_produit());
 
         try {
             PreparedStatement st;
             if (inventaire == null) {
                 st = cx.prepareStatement("insert into inventaire(code_produit, quantite, idTransaction, remarques, expirationDate) values(?, ?, ?, ?, ?)");
 
-                st.setInt(1, i.getCode_produit());
+                st.setInt(1, i.getProduit().getCode_produit());
                 st.setInt(2, i.getQuantite());
                 st.setInt(3, i.getIdTransaction());
                 st.setString(4, i.getRemarques());
@@ -313,7 +313,7 @@ public class GestionImpl implements IGestion {
                 st.setInt(3, i.getIdTransaction());
                 st.setDate(4, i.getDate());
                 st.setInt(5, i.getInventaireID());
-                st.setInt(6, i.getCode_produit());
+                st.setInt(6, i.getProduit().getCode_produit());
             }
 
             st.executeUpdate();
@@ -334,7 +334,7 @@ public class GestionImpl implements IGestion {
             st.setInt(3, i.getIdTransaction());
             st.setDate(4, i.getDate());
             st.setInt(5, i.getInventaireID());
-            st.setInt(6, i.getCode_produit());
+            st.setInt(6, i.getProduit().getCode_produit());
 
             st.executeUpdate();
         } catch (SQLException e1) {
@@ -356,11 +356,11 @@ public class GestionImpl implements IGestion {
 
             while (rs.next()) {
                 inventaire = new Inventaire(
-                        rs.getInt(2),
                         rs.getInt(3),
                         rs.getInt(5),
                         rs.getString(4),
-                        rs.getDate(6)
+                        rs.getDate(6),
+                        getProduit(rs.getInt(2))
                 );
                 inventaire.setInventaireID(rs.getInt(1));
             }
@@ -382,11 +382,11 @@ public class GestionImpl implements IGestion {
 
             while (rs.next()) {
                 Inventaire inventaire = new Inventaire(
-                        rs.getInt(2),
                         rs.getInt(3),
                         rs.getInt(5),
                         rs.getString(4),
-                        rs.getDate(6)
+                        rs.getDate(6),
+                        getProduit(rs.getInt(2))
                 );
                 inventaire.setInventaireID(rs.getInt(1));
 
@@ -415,11 +415,11 @@ public class GestionImpl implements IGestion {
 
             while (rs.next()) {
                 Inventaire inventaire = new Inventaire(
-                        rs.getInt(2),
                         rs.getInt(3),
                         rs.getInt(5),
                         rs.getString(4),
-                        rs.getDate(6)
+                        rs.getDate(6),
+                        getProduit(rs.getInt(2))
                 );
                 inventaire.setInventaireID(rs.getInt(1));
 

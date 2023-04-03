@@ -4,11 +4,12 @@ import com.toedter.calendar.JDateChooser;
 import dao.GestionImpl;
 import dao.IGestion;
 import metier.entity.Inventaire;
-import metier.entity.Produit;
 import presentation.tableModeles.TableModeleInventaire;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.util.List;
 
@@ -128,9 +129,31 @@ public class Stocker extends JFrame {
             }
         }).start();
 
+        // adding the mouseListener to the JTable:
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) {
+                    JTable target = (JTable) e.getSource();
+
+                    int row = target.getSelectedRow();
+
+                    int id = (int) target.getValueAt(row, 0);
+
+                    codeProduitTextField.setText(String.valueOf(id));
+
+                    Inventaire inventaire = gestion.getInventaire(id);
+
+                    calendar.setDate(inventaire.getDate());
+                    transactionIDTextField.setText(String.valueOf(inventaire.getIdTransaction()));
+                    quantityTextField.setText(String.valueOf(inventaire.getQuantite()));
+                }
+            }
+        });
+
         // adding the ActionListener to the JButtons:
         retour.addActionListener(e -> {
-            new GererInventaire_0();
+            new GererInventaire();
             dispose();
         });
         rechercher.addActionListener(e -> {
@@ -166,11 +189,11 @@ public class Stocker extends JFrame {
 
                         if (inventaire == null) {
                             inventaire = new Inventaire(
-                                    code,
                                     quantity,
                                     id,
                                     "non périmé",
-                                    date
+                                    date,
+                                    gestion.getProduit(code)
                             );
                         } else {
                             inventaire.setQuantite(quantity + inventaire.getQuantite());
@@ -207,10 +230,12 @@ public class Stocker extends JFrame {
         // colors (Foreground + Background):
         // Foreground:
         titre.setForeground(Color.BLACK);
+        submit.setForeground(Color.WHITE);
 
         // Background:
         retour.setBackground(Color.WHITE);
         rechercher.setBackground(Color.WHITE);
+        submit.setBackground(new Color(102,204, 0));
 
         // setting the bounds of the components:
         retour.setBounds(
@@ -233,7 +258,7 @@ public class Stocker extends JFrame {
         rechercherTextField.setBounds(
                 tableJPanel.getX(),
                 tableJPanel.getY() - 50,
-                400,
+                120,
                 40
         );
         rechercher.setBounds(

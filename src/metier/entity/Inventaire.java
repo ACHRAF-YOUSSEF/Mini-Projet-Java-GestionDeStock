@@ -11,15 +11,14 @@ import java.sql.Date;
 @Setter
 public class Inventaire {
     private int inventaireID;
-    private int code_produit;
     private int quantite;
     private int idTransaction;
     private String remarques;
     private Date date;
-    private IGestion gestion = GestionImpl.getGestion();
+    private Produit produit;
 
-    public Inventaire(int code_produit, int quantite, int idTransaction, String remarques, Date date) {
-        this.code_produit = code_produit;
+    public Inventaire(int quantite, int idTransaction, String remarques, Date date, Produit produit) {
+        this.produit = produit;
         this.quantite = quantite;
         this.idTransaction = idTransaction;
         this.remarques = remarques;

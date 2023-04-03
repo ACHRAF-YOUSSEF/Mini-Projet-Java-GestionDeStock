@@ -3,14 +3,20 @@ package presentation;
 import dao.GestionImpl;
 import dao.IGestion;
 import metier.entity.Produit;
+import metier.entity.Utilisateur;
 import presentation.tableModeles.TableModeleProduit;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class AjoutProduit extends JFrame {
     // components
+    // DefaultTableCellRenderer
+    private final DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     // JPanel
     private final JPanel tableJPanel = new JPanel(new GridLayout(1, 1));
     // JLabels
@@ -86,6 +92,13 @@ public class AjoutProduit extends JFrame {
         rechercher.setBorder(BorderFactory.createLineBorder(new Color(0,0, 0, Transparency.TRANSLUCENT)));
         rechercher.setBackground(new Color(0,0, 0, Transparency.TRANSLUCENT));
 
+        // centering each table entry to center by changing the cell renderer of each one :
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+
         // getting the list of Produit and updating the TableModeleProduit's data:
         me.chargerTable(gestion.getAllProduit());
 
@@ -124,6 +137,28 @@ public class AjoutProduit extends JFrame {
                 prixTextField.setText("");
             }
         }).start();
+
+        // adding the mouseListener to the JTable:
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) {
+                    JTable target = (JTable) e.getSource();
+
+                    int row = target.getSelectedRow();
+
+                    int id = (int) target.getValueAt(row, 0);
+
+                    codeProduitTextField.setText(String.valueOf(id));
+
+                    Produit produit = gestion.getProduit(id);
+
+                    nomProduitTextField.setText(produit.getNom());
+                    categorieTextField.setText(produit.getCategorie());
+                    prixTextField.setText(String.valueOf(produit.getPrix()));
+                }
+            }
+        });
 
         // adding the ActionListener to the JButtons:
         retour.addActionListener(e -> {
@@ -283,10 +318,18 @@ public class AjoutProduit extends JFrame {
         // colors (Foreground + Background):
         // Foreground:
         titre.setForeground(Color.BLACK);
+        ajouter.setForeground(Color.WHITE);
+        annuler.setForeground(Color.WHITE);
+        update.setForeground(Color.WHITE);
+        supprimer.setForeground(Color.WHITE);
 
         // Background:
         retour.setBackground(Color.WHITE);
         rechercher.setBackground(Color.WHITE);
+        ajouter.setBackground(new Color(20, 204, 204));
+        annuler.setBackground(new Color(20, 204, 204));
+        update.setBackground(new Color(20, 204, 204));
+        supprimer.setBackground(new Color(20, 204, 204));
 
         // setting the bounds of the retour JButton:
         retour.setBounds(
@@ -309,7 +352,7 @@ public class AjoutProduit extends JFrame {
         rechercherTextField.setBounds(
                 tableJPanel.getX(),
                 tableJPanel.getY() - 50,
-                400,
+                120,
                 40
         );
         rechercher.setBounds(

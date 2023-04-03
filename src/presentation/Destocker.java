@@ -8,6 +8,8 @@ import presentation.tableModeles.TableModeleInventaire;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Objects;
 
@@ -119,9 +121,31 @@ public class Destocker extends JFrame {
             }
         }).start();
 
+        // adding the mouseListener to the JTable:
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) {
+                    JTable target = (JTable) e.getSource();
+
+                    int row = target.getSelectedRow();
+
+                    int id = (int) target.getValueAt(row, 0);
+
+                    codeProduitTextField.setText(String.valueOf(id));
+
+                    Inventaire inventaire = gestion.getInventaire(id);
+
+                    codeProduitTextField.setText(String.valueOf(inventaire.getProduit().getCode_produit()));
+                    stockDisponibleTextField.setText(String.valueOf(inventaire.getQuantite()));
+                    remarquesComboBox.setSelectedItem(inventaire.getRemarques());
+                }
+            }
+        });
+
         // adding the ActionListener to the JButtons:
         retour.addActionListener(e -> {
-            new presentation.GererInventaire_0();
+            new presentation.GererInventaire();
             dispose();
         });
         rechercher.addActionListener(e -> {
@@ -165,7 +189,7 @@ public class Destocker extends JFrame {
                         } else {
                             inventaire.setQuantite(stock - quantity);
                             inventaire.setRemarques(
-                                    (Objects.equals(remarquesComboBox.getSelectedItem(), "expiré"))? "expiré": "non périmé"
+                                    (String) remarquesComboBox.getSelectedItem()
                             );
 
                             gestion.destocker(inventaire);
@@ -198,10 +222,12 @@ public class Destocker extends JFrame {
         // colors (Foreground + Background):
         // Foreground:
         titre.setForeground(Color.BLACK);
+        submit.setForeground(Color.WHITE);
 
         // Background:
         retour.setBackground(Color.WHITE);
         rechercher.setBackground(Color.WHITE);
+        submit.setBackground(new Color(20, 204, 204));
 
         // setting the bounds of the components:
         retour.setBounds(
@@ -224,7 +250,7 @@ public class Destocker extends JFrame {
         rechercherTextField.setBounds(
                 tableJPanel.getX(),
                 tableJPanel.getY() - 50,
-                400,
+                120,
                 40
         );
         rechercher.setBounds(
