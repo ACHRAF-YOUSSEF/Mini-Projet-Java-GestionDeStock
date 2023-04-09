@@ -700,8 +700,4 @@ public class Caissiere extends JFrame {
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
     }
-
-    public static void main(String[] args) {
-        new Caissiere("Caisse 1");
-    }
 }
