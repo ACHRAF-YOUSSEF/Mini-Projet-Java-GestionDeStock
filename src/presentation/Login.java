@@ -100,6 +100,14 @@ public class Login extends JFrame {
                 }
             }
         });
+        /*showPassword.addActionListener(e -> {
+            if (showPassword.isSelected()) {
+                passwordField.setEchoChar((char) 0);
+            }
+            else {
+                passwordField.setEchoChar('*');
+            }
+        });*/
 
         // setting focusable for the loginButton JButton + making the borders and the background blue
         loginButton.setFocusable(false);
@@ -128,5 +136,9 @@ public class Login extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(xSize, ySize - taskBarSize);
         this.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Login();
     }
 }

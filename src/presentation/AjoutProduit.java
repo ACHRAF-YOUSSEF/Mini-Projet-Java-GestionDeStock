@@ -105,39 +105,6 @@ public class AjoutProduit extends JFrame {
         // adding tool tips
         rechercherTextField.setToolTipText("faire une recherche");
 
-        // updating nomProduitTextField, categorieTextField, prixTextField JTextFields when codeProduitTextField is not empty
-        new javax.swing.Timer(0, e -> {
-            if (!codeProduitTextField.getText().equals("")) {
-                try {
-                    int code = Integer.parseInt(codeProduitTextField.getText());
-                    Produit produit = gestion.getProduit(code);
-
-                    if (produit != null) {
-                        if (nomProduitTextField.getText().equals("")) {
-                            nomProduitTextField.setText(produit.getNom());
-                        }
-                        if (categorieTextField.getText().equals("")) {
-                            categorieTextField.setText(produit.getCategorie());
-                        }
-
-                        if (prixTextField.getText().equals("")) {
-                            prixTextField.setText(String.valueOf(produit.getPrix()));
-                        }
-                    } else {
-                        nomProduitTextField.setText("");
-                        categorieTextField.setText("");
-                        prixTextField.setText("");
-                    }
-                } catch (NumberFormatException e1) {
-                    e1.printStackTrace();
-                }
-            } else {
-                nomProduitTextField.setText("");
-                categorieTextField.setText("");
-                prixTextField.setText("");
-            }
-        }).start();
-
         // adding the mouseListener to the JTable:
         table.addMouseListener(new MouseAdapter() {
             @Override

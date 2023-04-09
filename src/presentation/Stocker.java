@@ -95,40 +95,6 @@ public class Stocker extends JFrame {
         quantityTextField.setToolTipText("saisie la quantité du produit");
         rechercherTextField.setToolTipText("faire une recherche");
 
-        // updating transactionIDTextField, quantityTextField JTextFields and calendar JDateChooser when codeProduitTextField is not empty
-        new javax.swing.Timer(0, e -> {
-            if (!codeProduitTextField.getText().equals("")) {
-                try {
-                    int code = Integer.parseInt(codeProduitTextField.getText());
-                    Inventaire inventaire = gestion.getInventaire(code);
-
-                    if (inventaire != null) {
-                        if (transactionIDTextField.getText().equals("")) {
-                            transactionIDTextField.setText(String.valueOf(inventaire.getInventaireID()));
-                        }
-
-                        if (quantityTextField.getText().equals("")) {
-                            quantityTextField.setText(String.valueOf(inventaire.getQuantite()));
-                        }
-
-                        if (calendar.getDate() == null) {
-                            calendar.setDate(inventaire.getDate());
-                        }
-                    } else {
-                        calendar.setDate(null);
-                        transactionIDTextField.setText("");
-                        quantityTextField.setText("");
-                    }
-                } catch (NumberFormatException e1) {
-                    e1.printStackTrace();
-                }
-            } else {
-                calendar.setDate(null);
-                transactionIDTextField.setText("");
-                quantityTextField.setText("");
-            }
-        }).start();
-
         // adding the mouseListener to the JTable:
         table.addMouseListener(new MouseAdapter() {
             @Override

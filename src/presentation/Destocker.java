@@ -98,29 +98,6 @@ public class Destocker extends JFrame {
         stockDisponibleTextField.setToolTipText("saisie le stock disponible du produit");
         rechercherTextField.setToolTipText("faire une recherche");
 
-        // updating stockDisponibleTextField, remarquesComboBox, stockDisponibleTextField when codeProduitTextField is not empty
-        new Timer(0 , e -> {
-            if (!codeProduitTextField.getText().equals("")){
-                try {
-                    int code = Integer.parseInt(codeProduitTextField.getText());
-                    Produit produit = gestion.getProduit(code);
-                    Inventaire inventaire = gestion.getInventaire(code);
-
-                    if (produit != null) {
-                        stockDisponibleTextField.setText(String.valueOf(inventaire.getQuantite()));
-                    } else {
-                        remarquesComboBox.setSelectedIndex(0);
-                        stockDisponibleTextField.setText("");
-                    }
-                } catch (NumberFormatException e1) {
-                    e1.printStackTrace();
-                }
-            } else {
-                remarquesComboBox.setSelectedIndex(0);
-                stockDisponibleTextField.setText("");
-            }
-        }).start();
-
         // adding the mouseListener to the JTable:
         table.addMouseListener(new MouseAdapter() {
             @Override
