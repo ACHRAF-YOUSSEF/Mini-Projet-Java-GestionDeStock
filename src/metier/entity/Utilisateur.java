@@ -6,7 +6,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 public class Utilisateur {
     private int id;
     private String nom;
@@ -17,5 +16,14 @@ public class Utilisateur {
         this.nom = nom;
         this.mot_de_pass = mot_de_pass;
         this.admin = admin;
+    }
+
+    public Utilisateur(String nom) {
+        this.nom = nom;
+    }
+
+    @Override
+    public String toString() {
+        return nom.substring(0, 1).toUpperCase() + nom.substring(1).toLowerCase();
     }
 }

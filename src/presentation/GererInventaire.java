@@ -24,7 +24,7 @@ public class GererInventaire extends JFrame {
         this.setLayout(null);
 
         // changing the Background of the JFrame:
-        this.getContentPane().setBackground(Color.WHITE);
+        this.getContentPane().setBackground(MyColors._505050.getColor());
 
         // toolkit --> getting screen size (xSize, ySize) and tasBarSize:
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -82,18 +82,19 @@ public class GererInventaire extends JFrame {
 
         // colors (Foreground + Background):
         // Foreground:
-        titre.setForeground(Color.BLACK);
-        stockIn.setForeground(Color.WHITE);
-        stockOut.setForeground(Color.WHITE);
+        titre.setForeground(Color.WHITE);
+        stockIn.setForeground(Color.BLACK);
+        stockOut.setForeground(Color.BLACK);
 
         // Background:
-        retour.setBackground(Color.WHITE);
-        stockIn.setBackground(new Color(102,204, 0));
-        stockOut.setBackground(new Color(20, 204, 204));
+        retour.setBackground(MyColors._505050.getColor());
+        stockIn.setBackground(MyColors._00FFFF.getColor());
+        stockOut.setBackground(MyColors._00FFA2.getColor());
 
         // setting the bounds of the retour JButton:
-        retour.setBounds(40,
-                80,
+        retour.setBounds(
+                40,
+                20,
                 100,
                 60
         );

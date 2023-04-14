@@ -1,15 +1,13 @@
 package presentation.tableModeles;
 
-import dao.GestionImpl;
-import dao.IGestion;
-import metier.entity.*;
+import metier.entity.Inventaire;
+import metier.entity.Produit;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TableModeleCaissiereTable1 extends AbstractTableModel {
-    private final IGestion gestion = GestionImpl.getGestion();
     private List<Inventaire> inventaires = new ArrayList<>();
     private final String[] titres = {
             "Code Produit",

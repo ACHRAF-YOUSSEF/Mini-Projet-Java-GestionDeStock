@@ -18,9 +18,9 @@ public class Login extends JFrame {
     private final JTextField nomTextField = new JTextField();
     private final JPasswordField passwordField = new JPasswordField();
     // JComboBoxs:
-    JComboBox<String> comboBox = new JComboBox<>(new String[] {
-            "Admin",
-            "Caissiere"
+    JComboBox<Utilisateur> comboBox = new JComboBox<>(new Utilisateur[] {
+            new Utilisateur("Admin"),
+            new Utilisateur("Caissiere")
     });
     // JButtons:
     private final JButton loginButton = new JButton("Login");
@@ -40,7 +40,7 @@ public class Login extends JFrame {
         this.setLayout(null);
 
         // changing the Background of the JFrame
-        this.getContentPane().setBackground(new Color(80, 80, 80));
+        this.getContentPane().setBackground(MyColors._505050.getColor());
 
         // toolkit --> getting screen size (xSize, ySize) and tasBarSize:
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -100,19 +100,14 @@ public class Login extends JFrame {
                 }
             }
         });
-        /*showPassword.addActionListener(e -> {
-            if (showPassword.isSelected()) {
-                passwordField.setEchoChar((char) 0);
-            }
-            else {
-                passwordField.setEchoChar('*');
-            }
-        });*/
 
         // setting focusable for the loginButton JButton + making the borders and the background blue
         loginButton.setFocusable(false);
-        loginButton.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-        loginButton.setBackground(Color.BLUE);
+        loginButton.setBorder(BorderFactory.createLineBorder(
+                MyColors._0074B3.getColor()
+        ));
+        loginButton.setBackground(MyColors._0074B3.getColor());
+        loginButton.setForeground(Color.WHITE);
 
         // adding components to the panelA:
         panelA.add(loginLabel);
@@ -122,7 +117,8 @@ public class Login extends JFrame {
         // adding border to the panelA:
         panelA.setBorder(
                 BorderFactory.createLineBorder(
-                        Color.BLUE, 5
+                        MyColors._0074B3.getColor(),
+                        5
                 )
         );
 

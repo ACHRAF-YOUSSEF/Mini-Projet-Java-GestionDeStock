@@ -1,7 +1,5 @@
 package metier.entity;
 
-import dao.GestionImpl;
-import dao.IGestion;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -293,15 +293,15 @@ public class AjoutProduit extends JFrame {
         // Background:
         retour.setBackground(Color.WHITE);
         rechercher.setBackground(Color.WHITE);
-        ajouter.setBackground(new Color(20, 204, 204));
-        annuler.setBackground(new Color(20, 204, 204));
-        update.setBackground(new Color(20, 204, 204));
-        supprimer.setBackground(new Color(20, 204, 204));
+        ajouter.setBackground(MyColors._0044AD.getColor());
+        annuler.setBackground(MyColors._0044AD.getColor());
+        update.setBackground(MyColors._0044AD.getColor());
+        supprimer.setBackground(MyColors._0044AD.getColor());
 
         // setting the bounds of the retour JButton:
         retour.setBounds(
                 40,
-                80,
+                20,
                 100,
                 60
         );

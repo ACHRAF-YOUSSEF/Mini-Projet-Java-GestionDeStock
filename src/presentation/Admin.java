@@ -17,11 +17,11 @@ public class Admin extends JFrame {
     private ImageIcon gererInventaireIcon = new ImageIcon("src\\images\\gererInventaire.png");
     // JButtons
     private final JButton paramtres = new JButton("parametres");
-    private final JButton ajoutProduit = new JButton("ajout produit");
-    private final JButton gererUtilisateur = new JButton("gerer utilisateur");
-    private final JButton gererInventaire = new JButton("gerer inventaire");
+    private final JButton ajoutProduit = new JButton("Ajout Produit");
+    private final JButton gererUtilisateur = new JButton("Gerer Utilisateur");
+    private final JButton gererInventaire = new JButton("Gerer Inventaire");
     // JLabels
-    private final JLabel tableauDeBord = new JLabel("tableau de bord");
+    private final JLabel tableauDeBord = new JLabel("Tableau De Bord");
     private final JLabel time = new JLabel(dateFormat.format(date));
 
     public Admin() {
@@ -32,7 +32,7 @@ public class Admin extends JFrame {
         this.setLayout(null);
 
         // changing the Background of the JFrame
-        this.getContentPane().setBackground(new Color(80, 80, 80));
+        this.getContentPane().setBackground(MyColors._505050.getColor());
 
         // toolkit --> getting screen size (xSize, ySize) and tasBarSize:
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -93,15 +93,15 @@ public class Admin extends JFrame {
         time.setForeground(Color.WHITE);
         paramtres.setForeground(Color.WHITE);
         tableauDeBord.setForeground(Color.WHITE);
-        ajoutProduit.setForeground(Color.WHITE);
-        gererUtilisateur.setForeground(Color.WHITE);
-        gererInventaire.setForeground(Color.WHITE);
+        ajoutProduit.setForeground(Color.BLACK);
+        gererUtilisateur.setForeground(Color.BLACK);
+        gererInventaire.setForeground(Color.BLACK);
 
         // Background
-        paramtres.setBackground(new Color(80, 80, 80));
-        ajoutProduit.setBackground(new Color(160, 0, 150));
-        gererUtilisateur.setBackground(new Color(0, 0, 240));
-        gererInventaire.setBackground(new Color(0, 180, 0));
+        paramtres.setBackground(MyColors._505050.getColor());
+        ajoutProduit.setBackground(MyColors._FFDB6F.getColor());
+        gererUtilisateur.setBackground(MyColors._3CFFFF.getColor());
+        gererInventaire.setBackground(MyColors._00FFA2.getColor());
 
         // adding the ActionListener to the JButtons:
         paramtres.addActionListener(e -> {

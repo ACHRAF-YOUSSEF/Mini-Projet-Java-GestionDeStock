@@ -181,18 +181,18 @@ public class Caissiere extends JFrame {
         print.setForeground(Color.WHITE);
 
         // Background
-        paramtres.setBackground(new Color(80, 80, 80));
-        rechercher.setBackground(new Color(80, 80, 80));
-        rechercherTextField.setBackground(new Color(80, 80, 80));
-        argentTotaleJTextField.setBackground(new Color(80, 80, 80));
-        insertCommande.setBackground(new Color(20, 204, 204));
-        annulerCommande.setBackground(new Color(153, 54, 255));
-        annuler.setBackground(new Color(192, 192, 192));
-        print.setBackground(new Color(135,206,235));
-        prixTotaleJPanel.setBackground(new Color(128, 128, 128));
-        prixTotaleJPanel2.setBackground(new Color(128, 128, 128));
-        argentARetournerJPanel.setBackground(new Color(200,215,0));
-        argentARetournerJPanel2.setBackground(new Color(200,215,0));
+        paramtres.setBackground(MyColors._505050.getColor());
+        rechercher.setBackground(MyColors._505050.getColor());
+        rechercherTextField.setBackground(MyColors._505050.getColor());
+        argentTotaleJTextField.setBackground(MyColors._505050.getColor());
+        insertCommande.setBackground(MyColors._0044AD.getColor());
+        annulerCommande.setBackground(MyColors._AB00C8.getColor());
+        annuler.setBackground(MyColors._FF4141.getColor());
+        print.setBackground(MyColors._0074B3.getColor());
+        prixTotaleJPanel.setBackground(MyColors._808080.getColor());
+        prixTotaleJPanel2.setBackground(MyColors._808080.getColor());
+        argentARetournerJPanel.setBackground(MyColors._FFD700.getColor());
+        argentARetournerJPanel2.setBackground(MyColors._FFD700.getColor());
 
         // adding tool tips
         rechercherTextField.setToolTipText("faire une recherche");

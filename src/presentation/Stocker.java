@@ -201,16 +201,17 @@ public class Stocker extends JFrame {
         // Background:
         retour.setBackground(Color.WHITE);
         rechercher.setBackground(Color.WHITE);
-        submit.setBackground(new Color(102,204, 0));
+        submit.setBackground(MyColors._0044AD.getColor());
 
         // setting the bounds of the components:
         retour.setBounds(
                 40,
-                80,
+                20,
                 100,
                 60
         );
-        titre.setBounds(100,
+        titre.setBounds(
+                100,
                 150,
                 400,
                 60

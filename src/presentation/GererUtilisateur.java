@@ -129,10 +129,10 @@ public class GererUtilisateur extends JFrame {
         // Background:
         retour.setBackground(Color.WHITE);
         rechercher.setBackground(Color.WHITE);
-        ajouter.setBackground(new Color(20, 204, 204));
-        annuler.setBackground(new Color(0,153,0));
-        update.setBackground(new Color(255, 51, 51));
-        supprimer.setBackground(new Color(0, 128, 255));
+        ajouter.setBackground(MyColors._AB00C8.getColor());
+        annuler.setBackground(MyColors._006E00.getColor());
+        update.setBackground(MyColors._0074B3.getColor());
+        supprimer.setBackground(MyColors._D20000.getColor());
 
         // centering each table entry to center by changing the cell renderer of each one :
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -313,12 +313,14 @@ public class GererUtilisateur extends JFrame {
         });
 
         // setting the bounds of the components:
-        retour.setBounds(40,
-                80,
+        retour.setBounds(
+                40,
+                20,
                 100,
                 60
         );
-        titre.setBounds(100,
+        titre.setBounds(
+                100,
                 150,
                 400,
                 60

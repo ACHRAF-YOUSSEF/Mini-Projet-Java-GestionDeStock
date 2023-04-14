@@ -1,8 +1,5 @@
 package metier.entity;
 
-import lombok.*;
-
-@ToString
 public class Pdf {
     private int id;
     private static int count;

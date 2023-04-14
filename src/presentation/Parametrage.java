@@ -155,7 +155,7 @@ public class Parametrage extends JFrame {
         // setting the bounds of the components:
         retour.setBounds(
                 40,
-                80,
+                20,
                 100,
                 60
         );
