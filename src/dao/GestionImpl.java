@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestionImpl implements IGestion {
+    private Connection cx = SingletonConnection.getInstance();
     private final List<Inventaire> inventaires = new ArrayList<>();
     private static IGestion gestion;
 
@@ -25,8 +26,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public void ajouterProduit(Produit p) {
-        Connection cx = SingletonConnection.getInstance();
-
         try {
             PreparedStatement st = cx.prepareStatement("insert into produit(nom, categorie, prix) values(?, ?, ?)");
 
@@ -42,8 +41,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public void modifierProduit(Produit p) {
-        Connection cx = SingletonConnection.getInstance();
-
         try {
             PreparedStatement st = cx.prepareStatement("update produit set nom= ?, categorie= ?, prix= ? where code_produit= ?");
 
@@ -60,8 +57,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public void supprimerProduit(int code) {
-        Connection cx = SingletonConnection.getInstance();
-
         try {
             PreparedStatement st = cx.prepareStatement("delete from produit where code_produit= ?");
 
@@ -75,7 +70,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public Produit getProduit(int code) {
-        Connection cx = SingletonConnection.getInstance();
         Produit produit = null;
 
         try {
@@ -103,7 +97,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public List<Produit> getAllProduit() {
-        Connection cx = SingletonConnection.getInstance();
         List<Produit> list = new ArrayList<>();
 
         try {
@@ -129,7 +122,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public List<Produit> getProduitPMC(String mc) {
-        Connection cx = SingletonConnection.getInstance();
         List<Produit> list = new ArrayList<>();
 
         try {
@@ -159,8 +151,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public void ajouterUtilisateur(Utilisateur u) {
-        Connection cx = SingletonConnection.getInstance();
-
         try {
             PreparedStatement st = cx.prepareStatement("insert into utilisateur(nom, mot_de_pass, admin) values(?, ?, ?)");
 
@@ -176,8 +166,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public void modifierUtilisateur(Utilisateur u) {
-        Connection cx = SingletonConnection.getInstance();
-
         try {
             PreparedStatement st = cx.prepareStatement("update utilisateur set nom= ?, mot_de_pass= ?, admin= ? where id= ?");
 
@@ -194,8 +182,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public void supprimerUtilisateur(int id) {
-        Connection cx = SingletonConnection.getInstance();
-
         try {
             PreparedStatement st = cx.prepareStatement("delete from utilisateur where id= ?");
 
@@ -209,7 +195,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public Utilisateur getUtilisateur(int id) {
-        Connection cx = SingletonConnection.getInstance();
         Utilisateur utilisateur = null;
 
         try {
@@ -237,7 +222,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public List<Utilisateur> getAllUtilisateur() {
-        Connection cx = SingletonConnection.getInstance();
         List<Utilisateur> list = new ArrayList<>();
 
         try {
@@ -263,7 +247,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public List<Utilisateur> getUtilisateurPMC(String mc) {
-        Connection cx = SingletonConnection.getInstance();
         List<Utilisateur> list = new ArrayList<>();
 
         try {
@@ -292,7 +275,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public void stocker(Inventaire i) {
-        Connection cx = SingletonConnection.getInstance();
         Inventaire inventaire = getInventaire(i.getProduit().getCode_produit());
 
         try {
@@ -324,8 +306,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public void destocker(Inventaire i) {
-        Connection cx = SingletonConnection.getInstance();
-
         try {
             PreparedStatement st = cx.prepareStatement("update inventaire set quantite= ?, remarques= ?, IDTransaction= ?, expirationDate= ? where inventaireID= ? and code_produit= ?");
 
@@ -344,7 +324,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public Inventaire getInventaire(int code) {
-        Connection cx = SingletonConnection.getInstance();
         Inventaire inventaire = null;
 
         try {
@@ -373,7 +352,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public List<Inventaire> getAllInventaire() {
-        Connection cx = SingletonConnection.getInstance();
         List<Inventaire> list = new ArrayList<>();
 
         try {
@@ -401,7 +379,6 @@ public class GestionImpl implements IGestion {
 
     @Override
     public List<Inventaire> getInventairePMC(String mc) {
-        Connection cx = SingletonConnection.getInstance();
         List<Inventaire> list = new ArrayList<>();
 
         try {
