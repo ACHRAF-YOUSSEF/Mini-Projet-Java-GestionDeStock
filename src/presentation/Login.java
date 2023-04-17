@@ -81,7 +81,7 @@ public class Login extends JFrame {
                 Utilisateur utilisateur = new Utilisateur(
                         nomTextField.getText(),
                         String.valueOf(passwordField.getPassword()),
-                        (Objects.equals(comboBox.getSelectedItem(), "Admin"))? 1 : 0
+                        ((comboBox.getSelectedIndex() == 0)? 1 : 0)
                 );
 
                 if (loginSystem.validate(utilisateur)) {
